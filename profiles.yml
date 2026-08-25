@@ -1,0 +1,24 @@
+kn_dbt_new_framework_test:
+  target: sandbox
+  outputs:
+    sandbox:
+      type: snowflake
+      role: ROGUE_BRIGADE_ROLE_MEMBER
+      warehouse: ROGUE_BRIGADE_WH
+      database: ROGUE_BRIGADE_DP
+      schema: SRC
+      threads: 8
+      query_tag: '{"app":"DBT on Snowflake","env":"sandbox","owner":"kn_dbt_new_framework_test","version":"1.0"}'
+        #app: "dbt on snowflake"
+        #env: sandbox
+        #owner: kn_dbt_new_framework_test
+        #version: 1.0
+        #team: rogue_brigade
+    dev:
+      type: snowflake
+      role: ROGUE_BRIGADE_ROLE_MEMBER
+      warehouse: ROGUE_BRIGADE_WH
+      database: ROGUE_BRIGADE_DP
+      schema: SRC
+      threads: 8
+      query_tag: '{"app":"DBT","env":"dev","owner":"kn_dbt_new_framework_test","version":"1.0"}'

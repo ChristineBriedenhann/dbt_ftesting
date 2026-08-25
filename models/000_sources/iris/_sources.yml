@@ -1,0 +1,1040 @@
+version: 2
+
+sources:
+  - name: iris
+    database: rogue_brigade_raw
+    schema: iris
+    tables:
+      - name: allergy
+        description: |
+          Stores information about allergies, including the allergy type, patient ID, and reaction details.
+        columns:
+          - name: allergy_id
+            description: |
+              Unique identifier for the allergy record.
+            data_type: number(38,0)
+          
+          - name: patient_id
+            description: |
+              Identifier for the patient associated with the allergy.
+            data_type: number(38,0)
+          
+          - name: allergen
+            description: |
+              Substance or agent causing the allergic reaction.
+            data_type: varchar
+          
+          - name: allergen_type
+            description: |
+              Category or classification of the allergen.
+            data_type: varchar
+          
+          - name: reaction
+            description: |
+              Description of the symptoms or response to the allergen.
+            data_type: varchar
+          
+          - name: severity
+            description: |
+              Level of severity of the allergic reaction.
+            data_type: varchar
+          
+          - name: status
+            description: |
+              Current status of the allergy (e.g. active, inactive, resolved).
+            data_type: varchar
+          
+          - name: onset_date
+            description: |
+              Date when the allergy first occurred or was first observed.
+            data_type: date
+          
+          - name: recorded_date
+            description: |
+              Date when the allergy was recorded in the system.
+            data_type: timestamp_ntz
+          
+          - name: recorded_by_provider_id
+            description: |
+              Identifier for the healthcare provider who recorded the allergy.
+            data_type: number(38,0)
+          
+          - name: allergy_details
+            description: |
+              Additional information or notes about the allergy.
+            data_type: variant
+          
+          - name: _loaded_at
+            description: |
+              Timestamp when the data was loaded into the system.
+            data_type: timestamp_ntz
+
+      - name: appointment
+        description: |
+          Stores information about patient appointments, including scheduling details, provider assignments, and appointment status.
+        columns:
+          - name: appointment_id
+            description: |
+              Unique identifier for the appointment record.
+            data_type: number(38,0)
+          
+          - name: patient_id
+            description: |
+              Identifier for the patient associated with the appointment.
+            data_type: number(38,0)
+          
+          - name: provider_id
+            description: |
+              Identifier for the healthcare provider assigned to the appointment.
+            data_type: number(38,0)
+          
+          - name: facility_id
+            description: |
+              Identifier for the facility where the appointment takes place.
+            data_type: number(38,0)
+          
+          - name: department_id
+            description: |
+              Identifier for the department where the appointment is scheduled.
+            data_type: number(38,0)
+          
+          - name: appointment_date
+            description: |
+              Date and time when the appointment is scheduled.
+            data_type: timestamp_ntz
+          
+          - name: duration_minutes
+            description: |
+              Duration of the appointment in minutes.
+            data_type: number(38,0)
+          
+          - name: status
+            description: |
+              Current status of the appointment (e.g. scheduled, completed, cancelled).
+            data_type: varchar
+          
+          - name: appointment_type
+            description: |
+              Type or category of the appointment (e.g. follow-up, initial visit, urgent).
+            data_type: varchar
+          
+          - name: reason
+            description: |
+              Reason or purpose for the appointment.
+            data_type: varchar
+          
+          - name: notes
+            description: |
+              Additional notes or details about the appointment.
+            data_type: variant
+          
+          - name: created_at
+            description: |
+              Timestamp when the appointment record was created.
+            data_type: timestamp_ntz
+          
+          - name: _loaded_at
+            description: |
+              Timestamp when the data was loaded into the system.
+            data_type: timestamp_ntz
+
+      - name: claim
+        description: |
+          Stores information about insurance claims, including charges, submission details, and claim status.
+        columns:
+          - name: claim_id
+            description: |
+              Unique identifier for the claim record.
+            data_type: number(38,0)
+          
+          - name: encounter_id
+            description: |
+              Identifier for the encounter associated with the claim.
+            data_type: number(38,0)
+          
+          - name: patient_id
+            description: |
+              Identifier for the patient associated with the claim.
+            data_type: number(38,0)
+          
+          - name: facility_id
+            description: |
+              Identifier for the facility where services were rendered.
+            data_type: number(38,0)
+          
+          - name: plan_id
+            description: |
+              Identifier for the insurance plan billed for the claim.
+            data_type: number(38,0)
+          
+          - name: claim_number
+            description: |
+              External reference number assigned to the claim.
+            data_type: varchar
+          
+          - name: claim_type
+            description: |
+              Type or category of the claim (e.g. professional, institutional).
+            data_type: varchar
+          
+          - name: service_date
+            description: |
+              Date when the service was provided.
+            data_type: date
+          
+          - name: submitted_date
+            description: |
+              Date when the claim was submitted to the payer.
+            data_type: date
+          
+          - name: status
+            description: |
+              Current status of the claim (e.g. submitted, paid, denied).
+            data_type: varchar
+          
+          - name: total_charges
+            description: |
+              Total amount charged for the services on the claim.
+            data_type: number(38,0)
+          
+          - name: total_allowed
+            description: |
+              Total amount allowed by the payer for the claim.
+            data_type: number(38,0)
+          
+          - name: patient_responsibility
+            description: |
+              Amount the patient is responsible for paying.
+            data_type: number(38,0)
+          
+          - name: line_items
+            description: |
+              Detailed breakdown of individual services or charges on the claim.
+            data_type: variant
+          
+          - name: _loaded_at
+            description: |
+              Timestamp when the data was loaded into the system.
+            data_type: timestamp_ntz
+
+      - name: department
+        description: |
+          Stores information about departments within healthcare facilities, including specialties and operational status.
+        columns:
+          - name: department_id
+            description: |
+              Unique identifier for the department record.
+            data_type: number(38,0)
+          
+          - name: facility_id
+            description: |
+              Identifier for the facility the department belongs to.
+            data_type: number(38,0)
+          
+          - name: department_name
+            description: |
+              Name of the department.
+            data_type: varchar
+          
+          - name: department_code
+            description: |
+              Code or abbreviation used to identify the department.
+            data_type: varchar
+          
+          - name: specialty
+            description: |
+              Medical specialty associated with the department.
+            data_type: varchar
+          
+          - name: is_active
+            description: |
+              Flag indicating whether the department is currently active.
+            data_type: boolean
+          
+          - name: metadata
+            description: |
+              Additional metadata or configuration details about the department.
+            data_type: variant
+          
+          - name: _loaded_at
+            description: |
+              Timestamp when the data was loaded into the system.
+            data_type: timestamp_ntz
+
+      - name: diagnosis
+        description: |
+          Stores information about patient diagnoses, including ICD-10 codes, diagnosis type, and clinical status.
+        columns:
+          - name: diagnosis_id
+            description: |
+              Unique identifier for the diagnosis record.
+            data_type: number(38,0)
+          
+          - name: encounter_id
+            description: |
+              Identifier for the encounter during which the diagnosis was made.
+            data_type: number(38,0)
+          
+          - name: patient_id
+            description: |
+              Identifier for the patient associated with the diagnosis.
+            data_type: number(38,0)
+          
+          - name: provider_id
+            description: |
+              Identifier for the provider who made the diagnosis.
+            data_type: number(38,0)
+          
+          - name: icd10_code
+            description: |
+              ICD-10 code representing the diagnosis.
+            data_type: varchar
+          
+          - name: description
+            description: |
+              Textual description of the diagnosis.
+            data_type: varchar
+          
+          - name: diagnosis_type
+            description: |
+              Type or classification of the diagnosis (e.g. admitting, discharge, working).
+            data_type: varchar
+          
+          - name: is_primary
+            description: |
+              Flag indicating whether this is the primary diagnosis for the encounter.
+            data_type: boolean
+          
+          - name: onset_date
+            description: |
+              Date when the condition was first observed or reported.
+            data_type: date
+          
+          - name: resolved_date
+            description: |
+              Date when the condition was resolved or no longer active.
+            data_type: date
+          
+          - name: status
+            description: |
+              Current clinical status of the diagnosis (e.g. active, resolved, recurrence).
+            data_type: varchar
+          
+          - name: diagnosis_metadata
+            description: |
+              Additional metadata or clinical details about the diagnosis.
+            data_type: variant
+          
+          - name: _loaded_at
+            description: |
+              Timestamp when the data was loaded into the system.
+            data_type: timestamp_ntz
+
+      - name: encounter
+        description: |
+          Stores information about patient encounters, including visit types, admission and discharge details, and clinical context.
+        columns:
+          - name: encounter_id
+            description: |
+              Unique identifier for the encounter record.
+            data_type: number(38,0)
+          
+          - name: patient_id
+            description: |
+              Identifier for the patient involved in the encounter.
+            data_type: number(38,0)
+          
+          - name: provider_id
+            description: |
+              Identifier for the primary provider responsible for the encounter.
+            data_type: number(38,0)
+          
+          - name: facility_id
+            description: |
+              Identifier for the facility where the encounter took place.
+            data_type: number(38,0)
+          
+          - name: department_id
+            description: |
+              Identifier for the department where the encounter occurred.
+            data_type: number(38,0)
+          
+          - name: appointment_id
+            description: |
+              Identifier for the appointment associated with the encounter.
+            data_type: number(38,0)
+          
+          - name: encounter_type
+            description: |
+              Type or category of the encounter (e.g. inpatient, outpatient, emergency).
+            data_type: varchar
+          
+          - name: admit_date
+            description: |
+              Date and time when the patient was admitted.
+            data_type: timestamp_ntz
+          
+          - name: discharge_date
+            description: |
+              Date and time when the patient was discharged.
+            data_type: timestamp_ntz
+          
+          - name: status
+            description: |
+              Current status of the encounter (e.g. in-progress, completed, cancelled).
+            data_type: varchar
+          
+          - name: discharge_disposition
+            description: |
+              Disposition or outcome at the time of discharge (e.g. home, transferred, expired).
+            data_type: varchar
+          
+          - name: chief_complaint
+            description: |
+              Primary reason or complaint reported by the patient for the encounter.
+            data_type: varchar
+          
+          - name: encounter_data
+            description: |
+              Additional structured data or notes related to the encounter.
+            data_type: variant
+          
+          - name: _loaded_at
+            description: |
+              Timestamp when the data was loaded into the system.
+            data_type: timestamp_ntz
+
+      - name: facility
+        description: |
+          Stores information about healthcare facilities, including location, contact details, and operational status.
+        columns:
+          - name: facility_id
+            description: |
+              Unique identifier for the facility record.
+            data_type: number(38,0)
+          
+          - name: facility_name
+            description: |
+              Name of the healthcare facility.
+            data_type: varchar
+          
+          - name: facility_type
+            description: |
+              Type or classification of the facility (e.g. hospital, clinic, urgent care).
+            data_type: varchar
+          
+          - name: address
+            description: |
+              Structured address information for the facility.
+            data_type: variant
+          
+          - name: phone
+            description: |
+              Primary phone number for the facility.
+            data_type: varchar
+          
+          - name: npi
+            description: |
+              National Provider Identifier assigned to the facility.
+            data_type: varchar
+          
+          - name: tax_id
+            description: |
+              Tax identification number for the facility.
+            data_type: varchar
+          
+          - name: is_active
+            description: |
+              Flag indicating whether the facility is currently active.
+            data_type: boolean
+          
+          - name: created_at
+            description: |
+              Timestamp when the facility record was created.
+            data_type: timestamp_ntz
+          
+          - name: updated_at
+            description: |
+              Timestamp when the facility record was last updated.
+            data_type: timestamp_ntz
+          
+          - name: _loaded_at
+            description: |
+              Timestamp when the data was loaded into the system.
+            data_type: timestamp_ntz
+
+      - name: insurance_plan
+        description: |
+          Stores information about insurance plans, including payer details, plan types, and configuration.
+        columns:
+          - name: plan_id
+            description: |
+              Unique identifier for the insurance plan record.
+            data_type: number(38,0)
+          
+          - name: plan_name
+            description: |
+              Name of the insurance plan.
+            data_type: varchar
+          
+          - name: payer_name
+            description: |
+              Name of the insurance payer or carrier.
+            data_type: varchar
+          
+          - name: plan_type
+            description: |
+              Type or category of the plan (e.g. HMO, PPO, Medicare).
+            data_type: varchar
+          
+          - name: is_active
+            description: |
+              Flag indicating whether the plan is currently active.
+            data_type: boolean
+          
+          - name: plan_details
+            description: |
+              Additional structured details or configuration of the plan.
+            data_type: variant
+          
+          - name: _loaded_at
+            description: |
+              Timestamp when the data was loaded into the system.
+            data_type: timestamp_ntz
+
+      - name: lab_order
+        description: |
+          Stores information about laboratory orders, including ordering provider, collection details, and order status.
+        columns:
+          - name: lab_order_id
+            description: |
+              Unique identifier for the lab order record.
+            data_type: number(38,0)
+          
+          - name: encounter_id
+            description: |
+              Identifier for the encounter during which the lab was ordered.
+            data_type: number(38,0)
+          
+          - name: patient_id
+            description: |
+              Identifier for the patient the lab order is for.
+            data_type: number(38,0)
+          
+          - name: ordering_provider_id
+            description: |
+              Identifier for the provider who placed the lab order.
+            data_type: number(38,0)
+          
+          - name: order_date
+            description: |
+              Date and time when the lab order was placed.
+            data_type: timestamp_ntz
+          
+          - name: collection_date
+            description: |
+              Date and time when the specimen was collected.
+            data_type: timestamp_ntz
+          
+          - name: status
+            description: |
+              Current status of the lab order (e.g. ordered, collected, completed).
+            data_type: varchar
+          
+          - name: priority
+            description: |
+              Priority level of the lab order (e.g. routine, stat, urgent).
+            data_type: varchar
+          
+          - name: fasting_required
+            description: |
+              Flag indicating whether fasting is required before specimen collection.
+            data_type: boolean
+          
+          - name: order_details
+            description: |
+              Additional structured details about the lab order.
+            data_type: variant
+          
+          - name: _loaded_at
+            description: |
+              Timestamp when the data was loaded into the system.
+            data_type: timestamp_ntz
+
+      - name: lab_result
+        description: |
+          Stores information about laboratory test results, including values, units, reference ranges, and abnormality flags.
+        columns:
+          - name: lab_result_id
+            description: |
+              Unique identifier for the lab result record.
+            data_type: number(38,0)
+          
+          - name: lab_order_id
+            description: |
+              Identifier for the lab order this result belongs to.
+            data_type: number(38,0)
+          
+          - name: patient_id
+            description: |
+              Identifier for the patient the lab result is for.
+            data_type: number(38,0)
+          
+          - name: loinc_code
+            description: |
+              LOINC code identifying the laboratory test performed.
+            data_type: varchar
+          
+          - name: test_name
+            description: |
+              Name or description of the laboratory test.
+            data_type: varchar
+          
+          - name: result_value
+            description: |
+              Textual representation of the test result value.
+            data_type: varchar
+          
+          - name: result_numeric
+            description: |
+              Numeric representation of the test result value.
+            data_type: number(38,0)
+          
+          - name: units
+            description: |
+              Unit of measurement for the test result.
+            data_type: varchar
+          
+          - name: abnormal_flag
+            description: |
+              Flag indicating whether the result is abnormal (e.g. H, L, HH, LL).
+            data_type: varchar
+          
+          - name: status
+            description: |
+              Current status of the lab result (e.g. preliminary, final, corrected).
+            data_type: varchar
+          
+          - name: resulted_date
+            description: |
+              Date and time when the result was finalized.
+            data_type: timestamp_ntz
+          
+          - name: reference_range
+            description: |
+              Reference range information for the test result.
+            data_type: variant
+          
+          - name: _loaded_at
+            description: |
+              Timestamp when the data was loaded into the system.
+            data_type: timestamp_ntz
+
+      - name: medication_order
+        description: |
+          Stores information about medication orders, including drug details, dosage instructions, and pharmacy information.
+        columns:
+          - name: medication_order_id
+            description: |
+              Unique identifier for the medication order record.
+            data_type: number(38,0)
+          
+          - name: encounter_id
+            description: |
+              Identifier for the encounter during which the medication was ordered.
+            data_type: number(38,0)
+          
+          - name: patient_id
+            description: |
+              Identifier for the patient the medication is prescribed to.
+            data_type: number(38,0)
+          
+          - name: provider_id
+            description: |
+              Identifier for the provider who ordered the medication.
+            data_type: number(38,0)
+          
+          - name: ndc_code
+            description: |
+              National Drug Code identifying the specific medication product.
+            data_type: varchar
+          
+          - name: medication_name
+            description: |
+              Brand or trade name of the medication.
+            data_type: varchar
+          
+          - name: generic_name
+            description: |
+              Generic or chemical name of the medication.
+            data_type: varchar
+          
+          - name: order_date
+            description: |
+              Date and time when the medication order was placed.
+            data_type: timestamp_ntz
+          
+          - name: start_date
+            description: |
+              Date when the patient should begin taking the medication.
+            data_type: date
+          
+          - name: end_date
+            description: |
+              Date when the patient should stop taking the medication.
+            data_type: date
+          
+          - name: status
+            description: |
+              Current status of the medication order (e.g. active, completed, discontinued).
+            data_type: varchar
+          
+          - name: dosage_instructions
+            description: |
+              Structured dosage and administration instructions for the medication.
+            data_type: variant
+          
+          - name: pharmacy_info
+            description: |
+              Structured information about the dispensing pharmacy.
+            data_type: variant
+          
+          - name: _loaded_at
+            description: |
+              Timestamp when the data was loaded into the system.
+            data_type: timestamp_ntz
+
+      - name: patient
+        description: |
+          Stores information about patients, including demographics, contact details, insurance, and care assignments.
+        columns:
+          - name: patient_id
+            description: |
+              Unique identifier for the patient record.
+            data_type: number(38,0)
+          
+          - name: mrn
+            description: |
+              Medical record number assigned to the patient.
+            data_type: varchar
+          
+          - name: first_name
+            description: |
+              First name of the patient.
+            data_type: varchar
+          
+          - name: last_name
+            description: |
+              Last name of the patient.
+            data_type: varchar
+          
+          - name: date_of_birth
+            description: |
+              Date of birth of the patient.
+            data_type: date
+          
+          - name: gender
+            description: |
+              Gender of the patient.
+            data_type: varchar
+          
+          - name: ssn_last4
+            description: |
+              Last four digits of the patient's Social Security Number.
+            data_type: varchar
+          
+          - name: race
+            description: |
+              Race of the patient.
+            data_type: varchar
+          
+          - name: ethnicity
+            description: |
+              Ethnicity of the patient.
+            data_type: varchar
+          
+          - name: primary_language
+            description: |
+              Primary language spoken by the patient.
+            data_type: varchar
+          
+          - name: marital_status
+            description: |
+              Marital status of the patient.
+            data_type: varchar
+          
+          - name: contact_info
+            description: |
+              Structured contact information for the patient (e.g. phone, email, address).
+            data_type: variant
+          
+          - name: emergency_contact
+            description: |
+              Structured emergency contact information for the patient.
+            data_type: variant
+          
+          - name: insurance_info
+            description: |
+              Structured insurance coverage information for the patient.
+            data_type: variant
+          
+          - name: primary_facility_id
+            description: |
+              Identifier for the patient's primary care facility.
+            data_type: number(38,0)
+          
+          - name: primary_provider_id
+            description: |
+              Identifier for the patient's primary care provider.
+            data_type: number(38,0)
+          
+          - name: is_deceased
+            description: |
+              Flag indicating whether the patient is deceased.
+            data_type: boolean
+          
+          - name: deceased_date
+            description: |
+              Date of death if the patient is deceased.
+            data_type: date
+          
+          - name: created_at
+            description: |
+              Timestamp when the patient record was created.
+            data_type: timestamp_ntz
+          
+          - name: updated_at
+            description: |
+              Timestamp when the patient record was last updated.
+            data_type: timestamp_ntz
+          
+          - name: _loaded_at
+            description: |
+              Timestamp when the data was loaded into the system.
+            data_type: timestamp_ntz
+
+      - name: payment
+        description: |
+          Stores information about payments made against claims, including amounts, adjustments, and payment methods.
+        columns:
+          - name: payment_id
+            description: |
+              Unique identifier for the payment record.
+            data_type: number(38,0)
+          
+          - name: claim_id
+            description: |
+              Identifier for the claim this payment is applied to.
+            data_type: number(38,0)
+          
+          - name: payer_type
+            description: |
+              Type of payer making the payment (e.g. insurance, patient, government).
+            data_type: varchar
+          
+          - name: payment_date
+            description: |
+              Date when the payment was made.
+            data_type: date
+          
+          - name: amount
+            description: |
+              Amount of the payment.
+            data_type: number(38,0)
+          
+          - name: adjustment_amount
+            description: |
+              Amount adjusted or written off from the claim.
+            data_type: number(38,0)
+          
+          - name: payment_method
+            description: |
+              Method used to make the payment (e.g. check, EFT, credit card).
+            data_type: varchar
+          
+          - name: check_number
+            description: |
+              Check number if payment was made by check.
+            data_type: varchar
+          
+          - name: era_details
+            description: |
+              Electronic remittance advice details associated with the payment.
+            data_type: variant
+          
+          - name: _loaded_at
+            description: |
+              Timestamp when the data was loaded into the system.
+            data_type: timestamp_ntz
+
+      - name: procedure_order
+        description: |
+          Stores information about procedure orders, including CPT codes, performing providers, and procedure status.
+        columns:
+          - name: procedure_id
+            description: |
+              Unique identifier for the procedure order record.
+            data_type: number(38,0)
+          
+          - name: encounter_id
+            description: |
+              Identifier for the encounter during which the procedure was ordered.
+            data_type: number(38,0)
+          
+          - name: patient_id
+            description: |
+              Identifier for the patient the procedure is ordered for.
+            data_type: number(38,0)
+          
+          - name: ordering_provider_id
+            description: |
+              Identifier for the provider who ordered the procedure.
+            data_type: number(38,0)
+          
+          - name: performing_provider_id
+            description: |
+              Identifier for the provider who performed the procedure.
+            data_type: number(38,0)
+          
+          - name: cpt_code
+            description: |
+              CPT code identifying the procedure performed.
+            data_type: varchar
+          
+          - name: description
+            description: |
+              Textual description of the procedure.
+            data_type: varchar
+          
+          - name: procedure_date
+            description: |
+              Date and time when the procedure was performed.
+            data_type: timestamp_ntz
+          
+          - name: status
+            description: |
+              Current status of the procedure order (e.g. ordered, in-progress, completed).
+            data_type: varchar
+          
+          - name: priority
+            description: |
+              Priority level of the procedure (e.g. routine, urgent, emergent).
+            data_type: varchar
+          
+          - name: procedure_data
+            description: |
+              Additional structured data or notes about the procedure.
+            data_type: variant
+          
+          - name: _loaded_at
+            description: |
+              Timestamp when the data was loaded into the system.
+            data_type: timestamp_ntz
+
+      - name: provider
+        description: |
+          Stores information about healthcare providers, including credentials, specialties, and contact details.
+        columns:
+          - name: provider_id
+            description: |
+              Unique identifier for the provider record.
+            data_type: number(38,0)
+          
+          - name: facility_id
+            description: |
+              Identifier for the facility the provider is associated with.
+            data_type: number(38,0)
+          
+          - name: department_id
+            description: |
+              Identifier for the department the provider belongs to.
+            data_type: number(38,0)
+          
+          - name: first_name
+            description: |
+              First name of the provider.
+            data_type: varchar
+          
+          - name: last_name
+            description: |
+              Last name of the provider.
+            data_type: varchar
+          
+          - name: credentials
+            description: |
+              Professional credentials of the provider (e.g. MD, DO, NP).
+            data_type: varchar
+          
+          - name: specialty
+            description: |
+              Medical specialty of the provider.
+            data_type: varchar
+          
+          - name: npi
+            description: |
+              National Provider Identifier assigned to the provider.
+            data_type: varchar
+          
+          - name: dea_number
+            description: |
+              DEA registration number for controlled substance prescribing.
+            data_type: varchar
+          
+          - name: contact_info
+            description: |
+              Structured contact information for the provider.
+            data_type: variant
+          
+          - name: is_active
+            description: |
+              Flag indicating whether the provider is currently active.
+            data_type: boolean
+          
+          - name: hire_date
+            description: |
+              Date when the provider was hired.
+            data_type: date
+          
+          - name: _loaded_at
+            description: |
+              Timestamp when the data was loaded into the system.
+            data_type: timestamp_ntz
+
+      - name: vital_sign
+        description: |
+          Stores information about patient vital sign measurements recorded during encounters.
+        columns:
+          - name: vital_sign_id
+            description: |
+              Unique identifier for the vital sign record.
+            data_type: number(38,0)
+          
+          - name: encounter_id
+            description: |
+              Identifier for the encounter during which vitals were recorded.
+            data_type: number(38,0)
+          
+          - name: patient_id
+            description: |
+              Identifier for the patient whose vitals were recorded.
+            data_type: number(38,0)
+          
+          - name: recorded_by_provider_id
+            description: |
+              Identifier for the healthcare provider who recorded the vitals.
+            data_type: number(38,0)
+          
+          - name: recorded_at
+            description: |
+              Date and time when the vital signs were recorded.
+            data_type: timestamp_ntz
+          
+          - name: measurements
+            description: |
+              Structured vital sign measurements (e.g. blood pressure, heart rate, temperature).
+            data_type: variant
+          
+          - name: _loaded_at
+            description: |
+              Timestamp when the data was loaded into the system.
+            data_type: timestamp_ntz

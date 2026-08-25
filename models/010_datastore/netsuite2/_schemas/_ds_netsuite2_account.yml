@@ -1,0 +1,292 @@
+version: 2
+
+models:
+  - name: ds_netsuite2_account
+    description: |
+      The ds_netsuite2_account table stores transformed account data from NetSuite for data synchronization and analysis.
+    config:
+      contract:
+        enforced: true
+    data_tests:
+      - uniqueness_test_return_all_columns:
+          name: ds_netsuite2_account__uniqueness__datastore_key_columns
+          combination_of_columns:
+            - ds_netsuite2_account__key
+          config:
+            severity: "{{var('data_test_severity')}}"
+            where: "dbt_current_flag = 'Y'"
+      - uniqueness_test_return_all_columns:
+          name: ds_netsuite2_account__uniqueness__primary_key_current_flag
+          combination_of_columns:
+            - id
+          config:
+            severity: "{{var('data_test_severity')}}"
+            where: "dbt_current_flag = 'Y'"
+      - uniqueness_test_return_all_columns:
+          name: ds_netsuite2_account__uniqueness__primary_key_start_date
+          combination_of_columns:
+            - id
+            - dbt_start_date
+          config:
+            severity: "{{var('data_test_severity')}}"
+          #   where: "dbt_current_flag = 'Y'"
+      - uniqueness_test_return_all_columns:
+          name: ds_netsuite2_account__uniqueness__primary_key_version
+          combination_of_columns:
+            - id
+            - dbt_version
+          config:
+            severity: "{{var('data_test_severity')}}"
+          #   where: "dbt_current_flag = 'Y'"
+      - dbt_utils.expression_is_true:
+          name: ds_netsuite2_account__accepted_value__fivetran_deleted
+          expression: "_fivetran_active in (true, false)"
+          config:
+            severity: "{{var('data_test_severity')}}"
+            # where: "id > 5 or id < 10"
+      - dbt_utils.expression_is_true:
+          name: ds_netsuite2_account__not_null__ds_netsuite2_account__key
+          expression: "ds_netsuite2_account__key is not null"
+          config:
+            severity: "{{var('data_test_severity')}}"
+            # where: "id > 5 or id < 10"
+      - scd2_startdate_gt_enddate:
+          name: ds_netsuite2_account__scd2__startdate_greaterthan_enddate
+          business_key_columns: [id]
+          start_date_column: dbt_start_date
+          end_date_column: dbt_end_date
+          config:
+            severity: "{{var('data_test_severity')}}"
+      - scd2_startdate_version_gaps:
+          name: ds_netsuite2_account__scd2__startdate_has_gaps_to_next_version
+          business_key_columns: [id]
+          start_date_column: dbt_start_date
+          end_date_column: dbt_end_date
+          config:
+            severity: "{{var('data_test_severity')}}"
+
+    columns:
+      - name: ds_netsuite2_account__key
+        description: |
+          Unique key for the account in the NetSuite2 dataset.
+        data_type: number(18,0)
+      
+      - name: id
+        description: |
+          Unique identifier for the account.
+        data_type: number(38,0)
+      
+      - name: _fivetran_deleted
+        description: |
+          Indicates if the record has been deleted.
+        data_type: boolean
+      
+      - name: _fivetran_active
+        description: |
+          Indicates if the record is active.
+        data_type: boolean
+      
+      - name: _fivetran_synced
+        description: |
+          Timestamp of the last sync operation.
+        data_type: timestamp_ntz
+      
+      - name: accountsearchdisplayname
+        description: |
+          Display name used for account searches.
+        data_type: varchar
+      
+      - name: accountsearchdisplaynamecopy
+        description: |
+          Copy of the display name used for account searches.
+        data_type: varchar
+      
+      - name: acctnumber
+        description: |
+          Account number.
+        data_type: number(38,0)
+      
+      - name: accttype
+        description: |
+          Type of the account.
+        data_type: varchar
+      
+      - name: billableexpensesacct
+        description: |
+          Account for billable expenses.
+        data_type: number(38,0)
+      
+      - name: cashflowrate
+        description: |
+          Cash flow rate associated with the account.
+        data_type: varchar
+      
+      - name: category1099misc
+        description: |
+          Category for 1099-MISC forms.
+        data_type: number(38,0)
+      
+      - name: class
+        description: |
+          Classification of the account.
+        data_type: number(38,0)
+      
+      - name: currency
+        description: |
+          Currency used for the account.
+        data_type: number(38,0)
+      
+      - name: custrecord_fam_account_showinfixedasset
+        description: |
+          Custom record indicating if the account should show in fixed assets.
+        data_type: varchar
+      
+      - name: date_deleted
+        description: |
+          Date when the record was deleted.
+        data_type: number(38,0)
+      
+      - name: deferralacct
+        description: |
+          Account for deferrals.
+        data_type: number(38,0)
+      
+      - name: department
+        description: |
+          Department associated with the account.
+        data_type: number(38,0)
+      
+      - name: description
+        description: |
+          Description of the account.
+        data_type: number(38,0)
+      
+      - name: displaynamewithhierarchy
+        description: |
+          Display name including the hierarchy.
+        data_type: varchar
+      
+      - name: externalid
+        description: |
+          External identifier for the account.
+        data_type: varchar
+      
+      - name: fullname
+        description: |
+          Full name of the account.
+        data_type: varchar
+      
+      - name: generalrate
+        description: |
+          General rate associated with the account.
+        data_type: varchar
+      
+      - name: includechildren
+        description: |
+          Indicates if child accounts are included.
+        data_type: varchar
+      
+      - name: inventory
+        description: |
+          Inventory associated with the account.
+        data_type: varchar
+      
+      - name: isinactive
+        description: |
+          Indicates if the account is inactive.
+        data_type: varchar
+      
+      - name: issummary
+        description: |
+          Indicates if the account is a summary account.
+        data_type: varchar
+      
+      - name: lastmodifieddate
+        description: |
+          Date when the account was last modified.
+        data_type: timestamp_ntz
+      
+      - name: location
+        description: |
+          Location associated with the account.
+        data_type: number(38,0)
+      
+      - name: parent
+        description: |
+          Parent account.
+        data_type: number(38,0)
+      
+      - name: reconcilewithmatching
+        description: |
+          Indicates if the account reconciles with matching.
+        data_type: varchar
+      
+      - name: revalue
+        description: |
+          Indicates if the account is subject to revaluation.
+        data_type: varchar
+      
+      - name: sbankname
+        description: |
+          Name of the bank associated with the account.
+        data_type: number(38,0)
+      
+      - name: sbankroutingnumber
+        description: |
+          Routing number of the bank associated with the account.
+        data_type: number(38,0)
+      
+      - name: sspecacct
+        description: |
+          Special account identifier.
+        data_type: varchar
+      
+      - name: subsidiary
+        description: |
+          Subsidiary associated with the account.
+        data_type: varchar
+      
+      - name: eliminate
+        description: |
+          Indicates if the account is for elimination purposes.
+        data_type: varchar
+      
+      - name: _fivetran_synced_ltz
+        description: |
+          Timestamp of the last sync operation in local timezone.
+        data_type: timestamp_ntz
+      
+      - name: dbt_start_date
+        description: |
+          Start date for the DBT version.
+        data_type: timestamp_ntz
+      
+      - name: dbt_end_date
+        description: |
+          End date for the DBT version.
+        data_type: timestamp_ntz
+      
+      - name: dbt_version
+        description: |
+          Version of the DBT model.
+        data_type: number(38,0)
+      
+      - name: dbt_current_flag
+        description: |
+          Indicates if the record is the current version.
+        data_type: varchar(1)
+      
+      - name: dbt_delete_flag
+        description: |
+          Indicates if the record is marked for deletion.
+        data_type: varchar(1)
+      
+      - name: dbt_create_time
+        description: |
+          Timestamp when the record was created.
+        data_type: timestamp_ntz
+      
+      - name: dbt_update_time
+        description: |
+          Timestamp when the record was last updated.
+        data_type: timestamp_ntz

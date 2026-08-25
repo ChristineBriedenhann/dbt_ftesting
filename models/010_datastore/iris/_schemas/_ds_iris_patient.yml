@@ -1,0 +1,211 @@
+version: 2
+
+models:
+  - name: ds_iris_patient
+    description: |
+      Stores patient information related to the Iris dataset.
+    columns:
+      - name: ds_iris_patient__key
+        description: |
+          Unique identifier for the patient record in the database.
+        data_type: number(18,0)
+      
+      - name: patient_id
+        description: |
+          Identifier for the patient within the healthcare system.
+        data_type: number(38,0)
+      
+      - name: mrn
+        description: |
+          Medical Record Number assigned to the patient.
+        data_type: varchar
+      
+      - name: first_name
+        description: |
+          Patient's first name.
+        data_type: varchar
+      
+      - name: last_name
+        description: |
+          Patient's last name.
+        data_type: varchar
+      
+      - name: date_of_birth
+        description: |
+          Patient's date of birth.
+        data_type: date
+      
+      - name: gender
+        description: |
+          Patient's gender.
+        data_type: varchar
+      
+      - name: ssn_last4
+        description: |
+          Last four digits of the patient's Social Security Number.
+        data_type: varchar
+      
+      - name: race
+        description: |
+          Patient's racial background.
+        data_type: varchar
+      
+      - name: ethnicity
+        description: |
+          Patient's ethnic background.
+        data_type: varchar
+      
+      - name: primary_language
+        description: |
+          Patient's primary spoken language.
+        data_type: varchar
+      
+      - name: marital_status
+        description: |
+          Patient's marital status.
+        data_type: varchar
+      
+      - name: primary_facility_id
+        description: |
+          Identifier for the primary healthcare facility associated with the patient.
+        data_type: number(38,0)
+      
+      - name: primary_provider_id
+        description: |
+          Identifier for the primary healthcare provider associated with the patient.
+        data_type: number(38,0)
+      
+      - name: is_deceased
+        description: |
+          Indicator of whether the patient is deceased.
+        data_type: boolean
+      
+      - name: deceased_date
+        description: |
+          Date of the patient's death, if applicable.
+        data_type: date
+      
+      - name: created_at
+        description: |
+          Timestamp when the patient record was created.
+        data_type: timestamp_ntz
+      
+      - name: updated_at
+        description: |
+          Timestamp when the patient record was last updated.
+        data_type: timestamp_ntz
+      
+      - name: _loaded_at
+        description: |
+          Timestamp when the patient data was loaded into the database.
+        data_type: timestamp_ntz
+      
+      - name: contact_info_address_city
+        description: |
+          City of the patient's contact address.
+        data_type: varchar
+      
+      - name: contact_info_address_state
+        description: |
+          State of the patient's contact address.
+        data_type: varchar
+      
+      - name: contact_info_address_street
+        description: |
+          Street of the patient's contact address.
+        data_type: varchar
+      
+      - name: contact_info_address_zip
+        description: |
+          ZIP code of the patient's contact address.
+        data_type: varchar
+      
+      - name: contact_info_email
+        description: |
+          Patient's email address.
+        data_type: varchar
+      
+      - name: contact_info_phone_cell
+        description: |
+          Patient's cell phone number.
+        data_type: varchar
+      
+      - name: contact_info_phone_home
+        description: |
+          Patient's home phone number.
+        data_type: varchar
+      
+      - name: emergency_contact_name
+        description: |
+          Name of the patient's emergency contact.
+        data_type: varchar
+      
+      - name: emergency_contact_phone
+        description: |
+          Phone number of the patient's emergency contact.
+        data_type: varchar
+      
+      - name: emergency_contact_relationship
+        description: |
+          Relationship of the emergency contact to the patient.
+        data_type: varchar
+      
+      - name: insurance_info_primary_group_number
+        description: |
+          Group number for the patient's primary insurance.
+        data_type: varchar
+      
+      - name: insurance_info_primary_member_id
+        description: |
+          Member ID for the patient's primary insurance.
+        data_type: varchar
+      
+      - name: insurance_info_primary_plan_name
+        description: |
+          Name of the patient's primary insurance plan.
+        data_type: varchar
+      
+      - name: insurance_info_copay
+        description: |
+          Copay amount for the patient's primary insurance.
+        data_type: number(38,0)
+      
+      - name: _sf_load_at
+        description: |
+          Timestamp when the data was loaded into the Snowflake database.
+        data_type: timestamp_ntz
+      
+      - name: dbt_start_date
+        description: |
+          Start date of the data validity period in the DBT model.
+        data_type: timestamp_ntz
+      
+      - name: dbt_end_date
+        description: |
+          End date of the data validity period in the DBT model.
+        data_type: timestamp_ntz
+      
+      - name: dbt_version
+        description: |
+          Version of the DBT model.
+        data_type: number(38,0)
+      
+      - name: dbt_current_flag
+        description: |
+          Indicator of whether the record is current in the DBT model.
+        data_type: varchar(1)
+      
+      - name: dbt_delete_flag
+        description: |
+          Indicator of whether the record is marked for deletion in the DBT model.
+        data_type: varchar(1)
+      
+      - name: dbt_create_time
+        description: |
+          Timestamp when the record was created in the DBT model.
+        data_type: timestamp_ntz
+      
+      - name: dbt_update_time
+        description: |
+          Timestamp when the record was last updated in the DBT model.
+        data_type: timestamp_ntz

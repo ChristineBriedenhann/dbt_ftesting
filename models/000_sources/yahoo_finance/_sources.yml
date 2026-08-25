@@ -1,0 +1,189 @@
+version: 2
+
+sources:
+  - name: yahoo_finance
+    database: rogue_brigade_raw
+    schema: yahoo_finance
+    tables:
+      - name: fundamentals
+        description: |
+          Stores company fundamental financial data, including income statement, balance sheet, cash flow metrics, and valuation ratios.
+        columns:
+          - name: ticker
+            description: |
+              Stock ticker symbol identifying the company.
+            data_type: varchar
+          
+          - name: company_name
+            description: |
+              Full legal or trading name of the company.
+            data_type: varchar
+          
+          - name: sector
+            description: |
+              Economic sector the company belongs to (e.g. Technology, Healthcare, Financials).
+            data_type: varchar
+          
+          - name: industry
+            description: |
+              Industry classification within the sector.
+            data_type: varchar
+          
+          - name: report_period
+            description: |
+              Reporting period label (e.g. Q1 2024, FY 2023).
+            data_type: varchar
+          
+          - name: period_end_date
+            description: |
+              End date of the reporting period.
+            data_type: date
+          
+          - name: revenue_millions
+            description: |
+              Total revenue for the period in millions of dollars.
+            data_type: number(38,0)
+          
+          - name: net_income_millions
+            description: |
+              Net income for the period in millions of dollars.
+            data_type: number(38,0)
+          
+          - name: eps
+            description: |
+              Basic earnings per share for the period.
+            data_type: number(38,2)
+          
+          - name: eps_diluted
+            description: |
+              Diluted earnings per share for the period.
+            data_type: number(38,2)
+          
+          - name: total_assets_millions
+            description: |
+              Total assets on the balance sheet in millions of dollars.
+            data_type: number(38,0)
+          
+          - name: total_liabilities_millions
+            description: |
+              Total liabilities on the balance sheet in millions of dollars.
+            data_type: number(38,0)
+          
+          - name: shareholders_equity_millions
+            description: |
+              Total shareholders' equity in millions of dollars.
+            data_type: number(38,0)
+          
+          - name: operating_cash_flow_millions
+            description: |
+              Cash flow from operations in millions of dollars.
+            data_type: number(38,0)
+          
+          - name: free_cash_flow_millions
+            description: |
+              Free cash flow in millions of dollars.
+            data_type: number(38,0)
+          
+          - name: market_cap_billions
+            description: |
+              Market capitalization in billions of dollars.
+            data_type: number(38,1)
+          
+          - name: pe_ratio
+            description: |
+              Price-to-earnings ratio.
+            data_type: number(38,1)
+          
+          - name: price_to_book
+            description: |
+              Price-to-book value ratio.
+            data_type: number(38,1)
+          
+          - name: dividend_yield_pct
+            description: |
+              Dividend yield as a percentage.
+            data_type: number(38,2)
+          
+          - name: shares_outstanding_millions
+            description: |
+              Total shares outstanding in millions.
+            data_type: number(38,0)
+          
+          - name: debt_to_equity
+            description: |
+              Debt-to-equity ratio.
+            data_type: number(38,1)
+          
+          - name: roe_pct
+            description: |
+              Return on equity as a percentage.
+            data_type: number(38,1)
+          
+          - name: gross_margin_pct
+            description: |
+              Gross profit margin as a percentage.
+            data_type: number(38,1)
+          
+          - name: operating_margin_pct
+            description: |
+              Operating profit margin as a percentage.
+            data_type: number(38,1)
+          
+          - name: net_margin_pct
+            description: |
+              Net profit margin as a percentage.
+            data_type: number(38,1)
+          
+          - name: current_ratio
+            description: |
+              Current ratio (current assets divided by current liabilities).
+            data_type: number(38,2)
+          
+          - name: quick_ratio
+            description: |
+              Quick ratio (liquid assets divided by current liabilities).
+            data_type: number(38,2)
+
+      - name: stock_prices
+        description: |
+          Stores daily stock price data, including open, high, low, close, adjusted close, and trading volume.
+        columns:
+          - name: date
+            description: |
+              Trading date for the price record.
+            data_type: date
+          
+          - name: ticker
+            description: |
+              Stock ticker symbol identifying the security.
+            data_type: varchar
+          
+          - name: open
+            description: |
+              Opening price of the stock for the trading day.
+            data_type: number(38,2)
+          
+          - name: high
+            description: |
+              Highest price reached during the trading day.
+            data_type: number(38,2)
+          
+          - name: low
+            description: |
+              Lowest price reached during the trading day.
+            data_type: number(38,2)
+          
+          - name: close
+            description: |
+              Closing price of the stock for the trading day.
+            data_type: number(38,2)
+          
+          - name: adj_close
+            description: |
+              Adjusted closing price accounting for dividends and stock splits.
+            data_type: number(38,2)
+          
+          - name: volume
+            description: |
+              Total number of shares traded during the trading day.
+            data_type: number(38,0)

@@ -1,0 +1,2613 @@
+version: 2
+
+sources:
+  - name: netsuite2
+    database: rogue_brigade_raw
+    schema: netsuite2
+    tables:
+      - name: account
+        description: |
+          Stores the chart of accounts, including account types, hierarchy, and currency assignments.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the account record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: accountsearchdisplayname
+            description: |
+              Display name used in account search lookups.
+            data_type: varchar
+          
+          - name: accountsearchdisplaynamecopy
+            description: |
+              Copy of the account search display name.
+            data_type: varchar
+          
+          - name: acctnumber
+            description: |
+              Account number assigned in the chart of accounts.
+            data_type: number(38,0)
+          
+          - name: accttype
+            description: |
+              Account type classification (e.g. Income, Expense, Asset, Liability).
+            data_type: varchar
+          
+          - name: billableexpensesacct
+            description: |
+              Reference to the billable expenses account.
+            data_type: number(38,0)
+          
+          - name: cashflowrate
+            description: |
+              Cash flow rate type used for currency consolidation.
+            data_type: varchar
+          
+          - name: category1099misc
+            description: |
+              1099-MISC category reference for tax reporting.
+            data_type: number(38,0)
+          
+          - name: class
+            description: |
+              Class segment reference for the account.
+            data_type: number(38,0)
+          
+          - name: currency
+            description: |
+              Currency reference for the account.
+            data_type: number(38,0)
+          
+          - name: custrecord_fam_account_showinfixedasset
+            description: |
+              Custom field indicating whether the account is shown in fixed asset management.
+            data_type: varchar
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: deferralacct
+            description: |
+              Reference to the deferral account.
+            data_type: number(38,0)
+          
+          - name: department
+            description: |
+              Department segment reference for the account.
+            data_type: number(38,0)
+          
+          - name: description
+            description: |
+              Description identifier for the account.
+            data_type: number(38,0)
+          
+          - name: displaynamewithhierarchy
+            description: |
+              Full account name including parent hierarchy.
+            data_type: varchar
+          
+          - name: externalid
+            description: |
+              External system identifier for integration purposes.
+            data_type: varchar
+          
+          - name: fullname
+            description: |
+              Full hierarchical name of the account.
+            data_type: varchar
+          
+          - name: generalrate
+            description: |
+              General rate type used for currency consolidation.
+            data_type: varchar
+          
+          - name: includechildren
+            description: |
+              Flag indicating whether child accounts are included in reporting.
+            data_type: varchar
+          
+          - name: inventory
+            description: |
+              Flag indicating whether this is an inventory account.
+            data_type: varchar
+          
+          - name: isinactive
+            description: |
+              Flag indicating whether the account is inactive.
+            data_type: varchar
+          
+          - name: issummary
+            description: |
+              Flag indicating whether the account is a summary (parent) account.
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the account was last modified.
+            data_type: timestamp_ntz
+          
+          - name: location
+            description: |
+              Location segment reference for the account.
+            data_type: number(38,0)
+          
+          - name: parent
+            description: |
+              Reference to the parent account in the hierarchy.
+            data_type: number(38,0)
+          
+          - name: reconcilewithmatching
+            description: |
+              Flag indicating whether the account uses reconciliation matching.
+            data_type: varchar
+          
+          - name: revalue
+            description: |
+              Flag indicating whether the account is subject to revaluation.
+            data_type: varchar
+          
+          - name: sbankname
+            description: |
+              Bank name reference for the account.
+            data_type: number(38,0)
+          
+          - name: sbankroutingnumber
+            description: |
+              Bank routing number reference for the account.
+            data_type: number(38,0)
+          
+          - name: sspecacct
+            description: |
+              Special account type indicator.
+            data_type: varchar
+          
+          - name: subsidiary
+            description: |
+              Subsidiary assignment for the account.
+            data_type: varchar
+          
+          - name: eliminate
+            description: |
+              Flag indicating whether the account is used for intercompany elimination.
+            data_type: varchar
+
+      - name: accounting_book
+        description: |
+          Stores accounting book definitions, including primary and secondary books used for multi-book accounting.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the accounting book record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: basebook
+            description: |
+              Reference to the base accounting book.
+            data_type: number(38,0)
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: effectiveperiod
+            description: |
+              Reference to the period when this book became effective.
+            data_type: number(38,0)
+          
+          - name: externalid
+            description: |
+              External system identifier for integration purposes.
+            data_type: number(38,0)
+          
+          - name: isadjustmentonly
+            description: |
+              Flag indicating whether the book is used only for adjustments.
+            data_type: varchar
+          
+          - name: isconsolidated
+            description: |
+              Flag indicating whether the book is a consolidated book.
+            data_type: varchar
+          
+          - name: isprimary
+            description: |
+              Flag indicating whether this is the primary accounting book.
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the record was last modified.
+            data_type: timestamp_ntz
+          
+          - name: name
+            description: |
+              Name of the accounting book.
+            data_type: varchar
+          
+          - name: subsidiariesstring
+            description: |
+              Comma-separated list of subsidiary IDs associated with the book.
+            data_type: varchar
+
+      - name: accounting_book_subsidiaries
+        description: |
+          Maps accounting books to their associated subsidiaries and tracks status.
+        columns:
+          - name: _fivetran_id
+            description: |
+              Fivetran-generated unique identifier for the record.
+            data_type: varchar
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: accountingbook
+            description: |
+              Reference to the accounting book.
+            data_type: number(38,0)
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: status
+            description: |
+              Status of the accounting book for the subsidiary.
+            data_type: varchar
+          
+          - name: subsidiary
+            description: |
+              Reference to the subsidiary.
+            data_type: number(38,0)
+
+      - name: accounting_period
+        description: |
+          Stores accounting periods including months, quarters, and years, with locking and closing status.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the accounting period record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: _fivetran_start
+            description: |
+              Fivetran history mode start timestamp for this version of the record.
+            data_type: timestamp_ntz
+          
+          - name: _fivetran_end
+            description: |
+              Fivetran history mode end timestamp for this version of the record.
+            data_type: timestamp_ntz
+          
+          - name: alllocked
+            description: |
+              Flag indicating whether all transaction types are locked for this period.
+            data_type: varchar
+          
+          - name: allownonglchanges
+            description: |
+              Flag indicating whether non-GL changes are allowed in this period.
+            data_type: varchar
+          
+          - name: aplocked
+            description: |
+              Flag indicating whether accounts payable is locked for this period.
+            data_type: varchar
+          
+          - name: arlocked
+            description: |
+              Flag indicating whether accounts receivable is locked for this period.
+            data_type: varchar
+          
+          - name: closed
+            description: |
+              Flag indicating whether the period is closed.
+            data_type: varchar
+          
+          - name: closedondate
+            description: |
+              Date when the period was closed.
+            data_type: timestamp_ntz
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: enddate
+            description: |
+              End date of the accounting period.
+            data_type: timestamp_ntz
+          
+          - name: isadjust
+            description: |
+              Flag indicating whether this is an adjustment period.
+            data_type: varchar
+          
+          - name: isinactive
+            description: |
+              Flag indicating whether the period is inactive.
+            data_type: varchar
+          
+          - name: isposting
+            description: |
+              Flag indicating whether the period allows posting.
+            data_type: varchar
+          
+          - name: isquarter
+            description: |
+              Flag indicating whether the period represents a quarter.
+            data_type: varchar
+          
+          - name: isyear
+            description: |
+              Flag indicating whether the period represents a full year.
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the record was last modified.
+            data_type: timestamp_ntz
+          
+          - name: parent
+            description: |
+              Reference to the parent period (e.g. quarter for a month).
+            data_type: number(38,0)
+          
+          - name: periodname
+            description: |
+              Display name of the accounting period.
+            data_type: varchar
+          
+          - name: startdate
+            description: |
+              Start date of the accounting period.
+            data_type: timestamp_ntz
+
+      - name: accounting_period_fiscal_calendars
+        description: |
+          Maps accounting periods to fiscal calendars and their parent period relationships.
+        columns:
+          - name: _fivetran_id
+            description: |
+              Fivetran-generated unique identifier for the record.
+            data_type: varchar
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: accountingperiod
+            description: |
+              Reference to the accounting period.
+            data_type: number(38,0)
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: fiscalcalendar
+            description: |
+              Reference to the fiscal calendar.
+            data_type: number(38,0)
+          
+          - name: parent
+            description: |
+              Reference to the parent period within the fiscal calendar.
+            data_type: number(38,0)
+
+      - name: account_type
+        description: |
+          Stores account type definitions used to classify accounts in the chart of accounts.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the account type record.
+            data_type: varchar
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: balancesheet
+            description: |
+              Flag indicating whether this account type appears on the balance sheet.
+            data_type: varchar
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: defaultcashflowratetype
+            description: |
+              Default cash flow rate type for currency consolidation.
+            data_type: varchar
+          
+          - name: defaultgeneralratetype
+            description: |
+              Default general rate type for currency consolidation.
+            data_type: varchar
+          
+          - name: eliminationalgo
+            description: |
+              Elimination algorithm used for intercompany transactions.
+            data_type: varchar
+          
+          - name: includeinrevaldefault
+            description: |
+              Default flag for including in currency revaluation.
+            data_type: varchar
+          
+          - name: internalid
+            description: |
+              Internal numeric identifier for the account type.
+            data_type: number(38,0)
+          
+          - name: left
+            description: |
+              Indicates whether this account type has a normal left (debit) balance.
+            data_type: varchar
+          
+          - name: longname
+            description: |
+              Full descriptive name of the account type.
+            data_type: varchar
+          
+          - name: seqnum
+            description: |
+              Sequence number controlling display order.
+            data_type: number(38,0)
+          
+          - name: usercanchangerevaloption
+            description: |
+              Flag indicating whether users can change the revaluation option.
+            data_type: varchar
+
+      - name: classification
+        description: |
+          Stores classification (class) segment values used for transaction categorization.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the classification record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: externalid
+            description: |
+              External system identifier for integration purposes.
+            data_type: varchar
+          
+          - name: fullname
+            description: |
+              Full hierarchical name of the classification.
+            data_type: varchar
+          
+          - name: includechildren
+            description: |
+              Flag indicating whether child classifications are included in reporting.
+            data_type: varchar
+          
+          - name: isinactive
+            description: |
+              Flag indicating whether the classification is inactive.
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the record was last modified.
+            data_type: timestamp_ntz
+          
+          - name: name
+            description: |
+              Name of the classification.
+            data_type: varchar
+          
+          - name: parent
+            description: |
+              Reference to the parent classification in the hierarchy.
+            data_type: number(38,0)
+          
+          - name: subsidiary
+            description: |
+              Subsidiary assignment for the classification.
+            data_type: varchar
+
+      - name: consolidated_exchange_rate
+        description: |
+          Stores consolidated exchange rates between subsidiaries for different accounting books and periods.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the consolidated exchange rate record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: accountingbook
+            description: |
+              Reference to the accounting book.
+            data_type: number(38,0)
+          
+          - name: averagerate
+            description: |
+              Average exchange rate for the period.
+            data_type: number(18,6)
+          
+          - name: currentrate
+            description: |
+              Current (spot) exchange rate at period end.
+            data_type: number(18,6)
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: fromcurrency
+            description: |
+              Source currency reference for the exchange rate.
+            data_type: number(38,0)
+          
+          - name: fromsubsidiary
+            description: |
+              Source subsidiary reference for the exchange rate.
+            data_type: number(38,0)
+          
+          - name: historicalrate
+            description: |
+              Historical exchange rate for the period.
+            data_type: number(18,6)
+          
+          - name: postingperiod
+            description: |
+              Reference to the posting period for the exchange rate.
+            data_type: number(38,0)
+          
+          - name: tocurrency
+            description: |
+              Target currency reference for the exchange rate.
+            data_type: number(38,0)
+          
+          - name: tosubsidiary
+            description: |
+              Target subsidiary reference for the exchange rate.
+            data_type: number(38,0)
+
+      - name: currency
+        description: |
+          Stores currency definitions including symbols, exchange rates, and formatting preferences.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the currency record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: _fivetran_start
+            description: |
+              Fivetran history mode start timestamp for this version of the record.
+            data_type: timestamp_ntz
+          
+          - name: _fivetran_end
+            description: |
+              Fivetran history mode end timestamp for this version of the record.
+            data_type: timestamp_ntz
+          
+          - name: currencyformatsample
+            description: |
+              Sample format string showing how the currency is displayed.
+            data_type: varchar
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: displaysymbol
+            description: |
+              Symbol displayed in the user interface for the currency.
+            data_type: varchar
+          
+          - name: exchangerate
+            description: |
+              Default exchange rate relative to the base currency.
+            data_type: number(18,6)
+          
+          - name: fxrateupdatetimezone
+            description: |
+              Timezone used for exchange rate updates.
+            data_type: varchar
+          
+          - name: includeinfxrateupdates
+            description: |
+              Flag indicating whether this currency is included in automatic rate updates.
+            data_type: varchar
+          
+          - name: isbasecurrency
+            description: |
+              Flag indicating whether this is the base currency.
+            data_type: varchar
+          
+          - name: isinactive
+            description: |
+              Flag indicating whether the currency is inactive.
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the record was last modified.
+            data_type: timestamp_ntz
+          
+          - name: name
+            description: |
+              Name of the currency (e.g. US Dollar, Euro).
+            data_type: varchar
+          
+          - name: overridecurrencyformat
+            description: |
+              Flag indicating whether the default currency format is overridden.
+            data_type: varchar
+          
+          - name: symbol
+            description: |
+              Currency symbol (e.g. $, EUR).
+            data_type: varchar
+          
+          - name: symbolplacement
+            description: |
+              Position of the symbol relative to the amount.
+            data_type: number(38,0)
+
+      - name: customer
+        description: |
+          Stores customer records including company details, creation dates, and subsidiary assignments.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the customer record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: companyname
+            description: |
+              Company name of the customer.
+            data_type: varchar
+          
+          - name: datecreated
+            description: |
+              Timestamp when the customer record was created.
+            data_type: timestamp_ntz
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: entityid
+            description: |
+              Entity identifier or customer number.
+            data_type: varchar
+          
+          - name: externalid
+            description: |
+              External system identifier for integration purposes.
+            data_type: varchar
+          
+          - name: firstorderdate
+            description: |
+              Reference to the date of the customer's first order.
+            data_type: number(38,0)
+          
+          - name: isinactive
+            description: |
+              Flag indicating whether the customer is inactive.
+            data_type: varchar
+          
+          - name: isperson
+            description: |
+              Flag indicating whether the customer is an individual person rather than a company.
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the customer record was last modified.
+            data_type: timestamp_ntz
+          
+          - name: parent
+            description: |
+              Reference to the parent customer in the hierarchy.
+            data_type: number(38,0)
+          
+          - name: subsidiary
+            description: |
+              Primary subsidiary reference for the customer.
+            data_type: number(38,0)
+
+      - name: customer_subsidiary_relationship
+        description: |
+          Maps customers to their associated subsidiaries, identifying primary subsidiary assignments.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the relationship record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: entity
+            description: |
+              Reference to the customer entity.
+            data_type: number(38,0)
+          
+          - name: isprimarysub
+            description: |
+              Flag indicating whether this is the primary subsidiary for the customer.
+            data_type: boolean
+          
+          - name: subsidiary
+            description: |
+              Reference to the subsidiary.
+            data_type: number(38,0)
+
+      - name: department
+        description: |
+          Stores department segment values used for organizational categorization of transactions.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the department record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: externalid
+            description: |
+              External system identifier for integration purposes.
+            data_type: varchar
+          
+          - name: fullname
+            description: |
+              Full hierarchical name of the department.
+            data_type: varchar
+          
+          - name: includechildren
+            description: |
+              Flag indicating whether child departments are included in reporting.
+            data_type: varchar
+          
+          - name: isinactive
+            description: |
+              Flag indicating whether the department is inactive.
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the record was last modified.
+            data_type: timestamp_ntz
+          
+          - name: name
+            description: |
+              Name of the department.
+            data_type: varchar
+          
+          - name: parent
+            description: |
+              Reference to the parent department in the hierarchy.
+            data_type: number(38,0)
+          
+          - name: subsidiary
+            description: |
+              Subsidiary assignment for the department.
+            data_type: varchar
+
+      - name: employee
+        description: |
+          Stores employee records including personal details, department assignments, and employment dates.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the employee record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: approvallimit
+            description: |
+              Maximum amount the employee is authorized to approve.
+            data_type: number(38,0)
+          
+          - name: approver
+            description: |
+              Reference to the employee's approver.
+            data_type: number(38,0)
+          
+          - name: billaddresslist
+            description: |
+              Billing address list reference for the employee.
+            data_type: varchar
+          
+          - name: birthdate
+            description: |
+              Reference to the employee's birth date.
+            data_type: number(38,0)
+          
+          - name: billpay
+            description: |
+              Flag indicating whether the employee is eligible for bill pay.
+            data_type: varchar
+          
+          - name: class
+            description: |
+              Class segment reference for the employee.
+            data_type: number(38,0)
+          
+          - name: comments
+            description: |
+              Free-text comments about the employee.
+            data_type: varchar
+          
+          - name: currency
+            description: |
+              Currency reference for the employee.
+            data_type: number(38,0)
+          
+          - name: datecreated
+            description: |
+              Timestamp when the employee record was created.
+            data_type: timestamp_ntz
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: defaultaddress
+            description: |
+              Default address for the employee.
+            data_type: varchar
+          
+          - name: department
+            description: |
+              Department reference for the employee.
+            data_type: number(38,0)
+          
+          - name: entityid
+            description: |
+              Entity identifier or employee number.
+            data_type: varchar
+          
+          - name: externalid
+            description: |
+              External system identifier for integration purposes.
+            data_type: varchar
+          
+          - name: firstname
+            description: |
+              First name of the employee.
+            data_type: varchar
+          
+          - name: gender
+            description: |
+              Gender of the employee.
+            data_type: varchar
+          
+          - name: giveaccess
+            description: |
+              Flag indicating whether the employee has system access.
+            data_type: varchar
+          
+          - name: hiredate
+            description: |
+              Date when the employee was hired.
+            data_type: timestamp_ntz
+          
+          - name: isinactive
+            description: |
+              Flag indicating whether the employee is inactive.
+            data_type: varchar
+          
+          - name: issalesrep
+            description: |
+              Flag indicating whether the employee is a sales representative.
+            data_type: varchar
+          
+          - name: issupportrep
+            description: |
+              Flag indicating whether the employee is a support representative.
+            data_type: varchar
+          
+          - name: laborcost
+            description: |
+              Labor cost rate for the employee.
+            data_type: number(38,0)
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the employee record was last modified.
+            data_type: timestamp_ntz
+          
+          - name: lastname
+            description: |
+              Last name of the employee.
+            data_type: varchar
+          
+          - name: location
+            description: |
+              Location reference for the employee.
+            data_type: number(38,0)
+          
+          - name: middlename
+            description: |
+              Middle name of the employee.
+            data_type: varchar
+          
+          - name: releasedate
+            description: |
+              Date when the employee was released or terminated.
+            data_type: timestamp_ntz
+          
+          - name: subsidiary
+            description: |
+              Subsidiary reference for the employee.
+            data_type: number(38,0)
+          
+          - name: supervisor
+            description: |
+              Reference to the employee's supervisor.
+            data_type: number(38,0)
+          
+          - name: title
+            description: |
+              Job title of the employee.
+            data_type: varchar
+
+      - name: entity
+        description: |
+          Stores all entity records (customers, vendors, employees, etc.) with common attributes.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the entity record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: customer
+            description: |
+              Reference to the customer record if this entity is a customer.
+            data_type: number(38,0)
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: externalid
+            description: |
+              External system identifier for integration purposes.
+            data_type: varchar
+          
+          - name: isperson
+            description: |
+              Flag indicating whether the entity is an individual person.
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the entity record was last modified.
+            data_type: timestamp_ntz
+          
+          - name: name
+            description: |
+              Name of the entity.
+            data_type: varchar
+          
+          - name: parent
+            description: |
+              Reference to the parent entity in the hierarchy.
+            data_type: number(38,0)
+          
+          - name: project
+            description: |
+              Reference to the associated project.
+            data_type: number(38,0)
+          
+          - name: type
+            description: |
+              Entity type classification (e.g. Customer, Vendor, Employee).
+            data_type: varchar
+          
+          - name: vendor
+            description: |
+              Reference to the vendor record if this entity is a vendor.
+            data_type: number(38,0)
+
+      - name: entity_address
+        description: |
+          Stores addresses associated with entities, including street, city, state, and country details.
+        columns:
+          - name: nkey
+            description: |
+              Primary key for the entity address record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: addr1
+            description: |
+              Address line 1.
+            data_type: varchar
+          
+          - name: addr2
+            description: |
+              Address line 2.
+            data_type: varchar
+          
+          - name: addr3
+            description: |
+              Address line 3.
+            data_type: varchar
+          
+          - name: addressee
+            description: |
+              Addressee or recipient name.
+            data_type: varchar
+          
+          - name: addrtext
+            description: |
+              Full address as formatted text.
+            data_type: varchar
+          
+          - name: city
+            description: |
+              City of the address.
+            data_type: varchar
+          
+          - name: country
+            description: |
+              Country of the address.
+            data_type: varchar
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: dropdownstate
+            description: |
+              State value as shown in dropdown selections.
+            data_type: varchar
+          
+          - name: full_address
+            description: |
+              Complete formatted address string.
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the address was last modified.
+            data_type: timestamp_ntz
+          
+          - name: nkey_2
+            description: |
+              Secondary key reference for the address.
+            data_type: number(38,0)
+          
+          - name: override
+            description: |
+              Flag indicating whether the address format is overridden.
+            data_type: varchar
+          
+          - name: state
+            description: |
+              State or province of the address.
+            data_type: varchar
+          
+          - name: zip
+            description: |
+              Postal or ZIP code of the address.
+            data_type: varchar
+
+      - name: fiscal_calendar
+        description: |
+          Stores fiscal calendar definitions used to define period structures for subsidiaries.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the fiscal calendar record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: externalid
+            description: |
+              External system identifier for integration purposes.
+            data_type: number(38,0)
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the record was last modified.
+            data_type: timestamp_ntz
+          
+          - name: name
+            description: |
+              Name of the fiscal calendar.
+            data_type: varchar
+
+      - name: item
+        description: |
+          Stores item records including products, services, and inventory items with account assignments.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the item record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: asset_account_id
+            description: |
+              Reference to the asset account for the item.
+            data_type: number(38,0)
+          
+          - name: class
+            description: |
+              Class segment reference for the item.
+            data_type: number(38,0)
+          
+          - name: cost
+            description: |
+              Cost of the item.
+            data_type: number(38,0)
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: department
+            description: |
+              Department segment reference for the item.
+            data_type: number(38,0)
+          
+          - name: description
+            description: |
+              Description of the item.
+            data_type: varchar
+          
+          - name: displayname
+            description: |
+              Display name of the item.
+            data_type: varchar
+          
+          - name: expense_account_id
+            description: |
+              Reference to the expense account for the item.
+            data_type: number(38,0)
+          
+          - name: externalid
+            description: |
+              External system identifier for integration purposes.
+            data_type: varchar
+          
+          - name: fullname
+            description: |
+              Full hierarchical name of the item.
+            data_type: varchar
+          
+          - name: gain_loss_account_id
+            description: |
+              Reference to the gain/loss account for the item.
+            data_type: number(38,0)
+          
+          - name: income_account_id
+            description: |
+              Reference to the income account for the item.
+            data_type: number(38,0)
+          
+          - name: includechildren
+            description: |
+              Flag indicating whether child items are included in reporting.
+            data_type: varchar
+          
+          - name: interco_expense_account_id
+            description: |
+              Reference to the intercompany expense account.
+            data_type: number(38,0)
+          
+          - name: interco_income_account_id
+            description: |
+              Reference to the intercompany income account.
+            data_type: number(38,0)
+          
+          - name: isinactive
+            description: |
+              Flag indicating whether the item is inactive.
+            data_type: varchar
+          
+          - name: itemtype
+            description: |
+              Type classification of the item (e.g. Inventory, Service, Non-Inventory).
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the item record was last modified.
+            data_type: timestamp_ntz
+          
+          - name: location
+            description: |
+              Location segment reference for the item.
+            data_type: number(38,0)
+          
+          - name: name
+            description: |
+              Name of the item.
+            data_type: varchar
+          
+          - name: parent
+            description: |
+              Reference to the parent item in the hierarchy.
+            data_type: number(38,0)
+          
+          - name: subsidiary
+            description: |
+              Subsidiary assignment for the item.
+            data_type: varchar
+          
+          - name: vendorname
+            description: |
+              Preferred vendor name for the item.
+            data_type: varchar
+
+      - name: job
+        description: |
+          Stores project or job records associated with customers for tracking work and billing.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the job record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: customer
+            description: |
+              Reference to the customer the job belongs to.
+            data_type: number(38,0)
+          
+          - name: datecreated
+            description: |
+              Timestamp when the job was created.
+            data_type: timestamp_ntz
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: externalid
+            description: |
+              External system identifier for integration purposes.
+            data_type: varchar
+          
+          - name: isinactive
+            description: |
+              Flag indicating whether the job is inactive.
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the job record was last modified.
+            data_type: timestamp_ntz
+          
+          - name: parent
+            description: |
+              Reference to the parent job in the hierarchy.
+            data_type: number(38,0)
+          
+          - name: subsidiary
+            description: |
+              Subsidiary reference for the job.
+            data_type: number(38,0)
+
+      - name: location
+        description: |
+          Stores location records used as a segment for transactions and as physical site references.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the location record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: city
+            description: |
+              City where the location is situated.
+            data_type: varchar
+          
+          - name: country
+            description: |
+              Country where the location is situated.
+            data_type: varchar
+          
+          - name: date_deleted
+            description: |
+              Timestamp when the location was deleted.
+            data_type: timestamp_ntz
+          
+          - name: externalid
+            description: |
+              External system identifier for integration purposes.
+            data_type: varchar
+          
+          - name: fullname
+            description: |
+              Full hierarchical name of the location.
+            data_type: varchar
+          
+          - name: includechildren
+            description: |
+              Flag indicating whether child locations are included in reporting.
+            data_type: varchar
+          
+          - name: isinactive
+            description: |
+              Flag indicating whether the location is inactive.
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the location was last modified.
+            data_type: timestamp_ntz
+          
+          - name: mainaddress
+            description: |
+              Reference to the main address record for the location.
+            data_type: number(38,0)
+          
+          - name: name
+            description: |
+              Name of the location.
+            data_type: varchar
+          
+          - name: parent
+            description: |
+              Reference to the parent location in the hierarchy.
+            data_type: number(38,0)
+          
+          - name: state
+            description: |
+              State or province where the location is situated.
+            data_type: varchar
+          
+          - name: subsidiary
+            description: |
+              Subsidiary reference for the location.
+            data_type: number(38,0)
+
+      - name: location_main_address
+        description: |
+          Stores the main address details for locations.
+        columns:
+          - name: nkey
+            description: |
+              Primary key for the location main address record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: addr1
+            description: |
+              Address line 1.
+            data_type: varchar
+          
+          - name: addr2
+            description: |
+              Address line 2.
+            data_type: varchar
+          
+          - name: addr3
+            description: |
+              Address line 3.
+            data_type: varchar
+          
+          - name: addressee
+            description: |
+              Addressee or recipient name.
+            data_type: varchar
+          
+          - name: addrtext
+            description: |
+              Full address as formatted text.
+            data_type: varchar
+          
+          - name: city
+            description: |
+              City of the address.
+            data_type: varchar
+          
+          - name: country
+            description: |
+              Country of the address.
+            data_type: varchar
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: dropdownstate
+            description: |
+              State value as shown in dropdown selections.
+            data_type: varchar
+          
+          - name: full_address
+            description: |
+              Complete formatted address string.
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the address was last modified.
+            data_type: timestamp_ntz
+          
+          - name: nkey_2
+            description: |
+              Secondary key reference for the address.
+            data_type: number(38,0)
+          
+          - name: override
+            description: |
+              Flag indicating whether the address format is overridden.
+            data_type: varchar
+          
+          - name: state
+            description: |
+              State or province of the address.
+            data_type: varchar
+          
+          - name: zip
+            description: |
+              Postal or ZIP code of the address.
+            data_type: varchar
+
+      - name: nexus
+        description: |
+          Stores tax nexus records representing jurisdictions where the company has tax obligations.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the nexus record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: country
+            description: |
+              Country of the tax nexus.
+            data_type: varchar
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: description
+            description: |
+              Description of the nexus.
+            data_type: varchar
+          
+          - name: externalid
+            description: |
+              External system identifier for integration purposes.
+            data_type: number(38,0)
+          
+          - name: isinactive
+            description: |
+              Flag indicating whether the nexus is inactive.
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the nexus was last modified.
+            data_type: timestamp_ntz
+          
+          - name: taxagency
+            description: |
+              Reference to the tax agency associated with the nexus.
+            data_type: number(38,0)
+
+      - name: subsidiary
+        description: |
+          Stores subsidiary records representing legal entities within the organization hierarchy.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the subsidiary record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: country
+            description: |
+              Country where the subsidiary is registered.
+            data_type: varchar
+          
+          - name: currency
+            description: |
+              Base currency reference for the subsidiary.
+            data_type: number(38,0)
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: edition
+            description: |
+              NetSuite edition for the subsidiary.
+            data_type: varchar
+          
+          - name: externalid
+            description: |
+              External system identifier for integration purposes.
+            data_type: varchar
+          
+          - name: fiscalcalendar
+            description: |
+              Reference to the fiscal calendar used by the subsidiary.
+            data_type: number(38,0)
+          
+          - name: fullname
+            description: |
+              Full hierarchical name of the subsidiary.
+            data_type: varchar
+          
+          - name: iselimination
+            description: |
+              Flag indicating whether this is an elimination subsidiary.
+            data_type: varchar
+          
+          - name: isinactive
+            description: |
+              Flag indicating whether the subsidiary is inactive.
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the subsidiary was last modified.
+            data_type: timestamp_ntz
+          
+          - name: legalname
+            description: |
+              Legal registered name of the subsidiary.
+            data_type: varchar
+          
+          - name: name
+            description: |
+              Display name of the subsidiary.
+            data_type: varchar
+          
+          - name: parent
+            description: |
+              Reference to the parent subsidiary in the hierarchy.
+            data_type: number(38,0)
+          
+          - name: state
+            description: |
+              State or province where the subsidiary is registered.
+            data_type: varchar
+
+      - name: transaction
+        description: |
+          Stores transaction header records including invoices, bills, journal entries, and other financial documents.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the transaction record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: accountingperiod
+            description: |
+              Reference to the accounting period for the transaction.
+            data_type: number(38,0)
+          
+          - name: closedate
+            description: |
+              Date when the transaction was closed.
+            data_type: timestamp_ntz
+          
+          - name: currency
+            description: |
+              Currency reference for the transaction.
+            data_type: number(38,0)
+          
+          - name: datecreated
+            description: |
+              Timestamp when the transaction was created.
+            data_type: timestamp_ntz
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: duedate
+            description: |
+              Due date for the transaction.
+            data_type: timestamp_ntz
+          
+          - name: entity
+            description: |
+              Reference to the entity (customer, vendor, employee) on the transaction.
+            data_type: number(38,0)
+          
+          - name: exchangerate
+            description: |
+              Exchange rate applied to the transaction.
+            data_type: number(18,6)
+          
+          - name: externalid
+            description: |
+              External system identifier for integration purposes.
+            data_type: varchar
+          
+          - name: isreversal
+            description: |
+              Flag indicating whether this transaction is a reversal.
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the transaction was last modified.
+            data_type: timestamp_ntz
+          
+          - name: memo
+            description: |
+              Memo or description for the transaction.
+            data_type: varchar
+          
+          - name: nexus
+            description: |
+              Reference to the tax nexus for the transaction.
+            data_type: number(38,0)
+          
+          - name: postingperiod
+            description: |
+              Reference to the posting period for the transaction.
+            data_type: number(38,0)
+          
+          - name: recordtype
+            description: |
+              Record type of the transaction (e.g. invoice, bill, journalentry).
+            data_type: varchar
+          
+          - name: status
+            description: |
+              Current status of the transaction.
+            data_type: varchar
+          
+          - name: subsidiary
+            description: |
+              Subsidiary reference for the transaction.
+            data_type: number(38,0)
+          
+          - name: title
+            description: |
+              Title of the transaction.
+            data_type: varchar
+          
+          - name: transactionnumber
+            description: |
+              System-generated transaction number.
+            data_type: varchar
+          
+          - name: trandate
+            description: |
+              Transaction date.
+            data_type: timestamp_ntz
+          
+          - name: tranid
+            description: |
+              User-facing transaction identifier or document number.
+            data_type: varchar
+          
+          - name: type
+            description: |
+              Transaction type code.
+            data_type: varchar
+          
+          - name: visibletosubsidiary
+            description: |
+              Subsidiaries that can view this transaction.
+            data_type: varchar
+          
+          - name: voided
+            description: |
+              Flag indicating whether the transaction has been voided.
+            data_type: varchar
+
+      - name: transaction_accounting_line
+        description: |
+          Stores the accounting impact of transaction lines, including debit/credit amounts and account postings.
+        columns:
+          - name: transaction_id
+            description: |
+              Reference to the parent transaction.
+            data_type: number(38,0)
+          
+          - name: transaction_line_id
+            description: |
+              Reference to the transaction line.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: account_id
+            description: |
+              Reference to the GL account for the posting.
+            data_type: number(38,0)
+          
+          - name: accountingbook
+            description: |
+              Reference to the accounting book for the posting.
+            data_type: number(38,0)
+          
+          - name: amount
+            description: |
+              Net amount of the accounting line (debit positive, credit negative).
+            data_type: number(18,2)
+          
+          - name: amountlinked
+            description: |
+              Amount linked to other transactions (e.g. payments applied).
+            data_type: number(18,2)
+          
+          - name: amountpaid
+            description: |
+              Amount paid against this line.
+            data_type: number(18,2)
+          
+          - name: amountunpaid
+            description: |
+              Amount remaining unpaid on this line.
+            data_type: number(18,2)
+          
+          - name: credit
+            description: |
+              Credit amount for the accounting line.
+            data_type: number(18,2)
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: debit
+            description: |
+              Debit amount for the accounting line.
+            data_type: number(18,2)
+          
+          - name: exchangerate
+            description: |
+              Exchange rate applied to the accounting line.
+            data_type: number(18,6)
+          
+          - name: netamount
+            description: |
+              Net amount after adjustments.
+            data_type: number(18,2)
+          
+          - name: overheadparentitem
+            description: |
+              Reference to the overhead parent item.
+            data_type: number(38,0)
+          
+          - name: paid
+            description: |
+              Flag indicating whether the line is fully paid.
+            data_type: varchar
+          
+          - name: paymenthold
+            description: |
+              Flag indicating whether payment is on hold.
+            data_type: varchar
+          
+          - name: posting
+            description: |
+              Flag indicating whether this is a posting line.
+            data_type: varchar
+
+      - name: transaction_line
+        description: |
+          Stores transaction line details including items, amounts, quantities, and segment assignments.
+        columns:
+          - name: id
+            description: |
+              Line identifier within the transaction.
+            data_type: number(38,0)
+          
+          - name: transaction_id
+            description: |
+              Reference to the parent transaction.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: amount
+            description: |
+              Amount for the transaction line.
+            data_type: number(18,2)
+          
+          - name: class
+            description: |
+              Class segment reference for the line.
+            data_type: number(38,0)
+          
+          - name: closedate
+            description: |
+              Date when the line was closed.
+            data_type: timestamp_ntz
+          
+          - name: company
+            description: |
+              Reference to the company (entity) on the line.
+            data_type: number(38,0)
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: department
+            description: |
+              Department segment reference for the line.
+            data_type: number(38,0)
+          
+          - name: donotdisplayline
+            description: |
+              Flag indicating whether the line should be hidden from display.
+            data_type: varchar
+          
+          - name: entity
+            description: |
+              Reference to the entity on the line.
+            data_type: number(38,0)
+          
+          - name: expenseaccount
+            description: |
+              Reference to the expense account for the line.
+            data_type: number(38,0)
+          
+          - name: isbillable
+            description: |
+              Flag indicating whether the line is billable.
+            data_type: varchar
+          
+          - name: isclosed
+            description: |
+              Flag indicating whether the line is closed.
+            data_type: varchar
+          
+          - name: iscogs
+            description: |
+              Flag indicating whether the line represents cost of goods sold.
+            data_type: varchar
+          
+          - name: isfullyshipped
+            description: |
+              Flag indicating whether the line is fully shipped.
+            data_type: varchar
+          
+          - name: ismainline
+            description: |
+              Flag indicating whether this is the main line (summary) of the transaction.
+            data_type: varchar
+          
+          - name: istaxline
+            description: |
+              Flag indicating whether this is a tax line.
+            data_type: varchar
+          
+          - name: item
+            description: |
+              Reference to the item on the line.
+            data_type: number(38,0)
+          
+          - name: kitcomponent
+            description: |
+              Flag indicating whether this line is a kit component.
+            data_type: varchar
+          
+          - name: linelastmodifieddate
+            description: |
+              Timestamp when the line was last modified.
+            data_type: timestamp_ntz
+          
+          - name: linesequencenumber
+            description: |
+              Sequence number controlling line display order.
+            data_type: number(38,0)
+          
+          - name: location
+            description: |
+              Location segment reference for the line.
+            data_type: number(38,0)
+          
+          - name: mainline
+            description: |
+              Flag indicating main line status.
+            data_type: varchar
+          
+          - name: memo
+            description: |
+              Memo or description for the line.
+            data_type: varchar
+          
+          - name: netamount
+            description: |
+              Net amount of the line after discounts and adjustments.
+            data_type: number(18,2)
+          
+          - name: non_posting_line
+            description: |
+              Flag indicating whether this is a non-posting line.
+            data_type: varchar
+          
+          - name: quantity
+            description: |
+              Quantity on the transaction line.
+            data_type: number(18,2)
+          
+          - name: subsidiary
+            description: |
+              Subsidiary reference for the line.
+            data_type: number(38,0)
+          
+          - name: taxline
+            description: |
+              Flag indicating tax line status.
+            data_type: varchar
+          
+          - name: transaction_discount
+            description: |
+              Flag indicating whether this line represents a transaction-level discount.
+            data_type: varchar
+
+      - name: vendor
+        description: |
+          Stores vendor records including payment terms, balances, and subsidiary assignments.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the vendor record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: accountnumber
+            description: |
+              Account number assigned by the vendor.
+            data_type: varchar
+          
+          - name: alternateemail
+            description: |
+              Alternate email address for the vendor.
+            data_type: varchar
+          
+          - name: balance
+            description: |
+              Current outstanding balance for the vendor.
+            data_type: number(38,0)
+          
+          - name: balanceprimary
+            description: |
+              Outstanding balance in the primary subsidiary currency.
+            data_type: number(38,0)
+          
+          - name: bcnbstnumber
+            description: |
+              BCN/BST number for the vendor.
+            data_type: number(38,0)
+          
+          - name: billpay
+            description: |
+              Flag indicating whether bill pay is enabled for the vendor.
+            data_type: varchar
+          
+          - name: category
+            description: |
+              Reference to the vendor category.
+            data_type: number(38,0)
+          
+          - name: comments
+            description: |
+              Free-text comments about the vendor.
+            data_type: varchar
+          
+          - name: companyname
+            description: |
+              Company name of the vendor.
+            data_type: varchar
+          
+          - name: creditlimit
+            description: |
+              Credit limit for the vendor.
+            data_type: number(38,0)
+          
+          - name: currency
+            description: |
+              Currency reference for the vendor.
+            data_type: number(38,0)
+          
+          - name: datecreated
+            description: |
+              Timestamp when the vendor record was created.
+            data_type: timestamp_ntz
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: defaultaddress
+            description: |
+              Default address for the vendor.
+            data_type: varchar
+          
+          - name: entityid
+            description: |
+              Entity identifier or vendor number.
+            data_type: varchar
+          
+          - name: externalid
+            description: |
+              External system identifier for integration purposes.
+            data_type: varchar
+          
+          - name: fxbalance
+            description: |
+              Outstanding balance in foreign currency.
+            data_type: number(38,0)
+          
+          - name: givesaccess
+            description: |
+              Flag indicating whether the vendor has portal access.
+            data_type: varchar
+          
+          - name: globalsubscriptionstatus
+            description: |
+              Global email subscription status for the vendor.
+            data_type: varchar
+          
+          - name: is1099eligible
+            description: |
+              Flag indicating whether the vendor is eligible for 1099 reporting.
+            data_type: varchar
+          
+          - name: isinactive
+            description: |
+              Flag indicating whether the vendor is inactive.
+            data_type: varchar
+          
+          - name: isperson
+            description: |
+              Flag indicating whether the vendor is an individual person.
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Timestamp when the vendor record was last modified.
+            data_type: timestamp_ntz
+          
+          - name: legalname
+            description: |
+              Legal registered name of the vendor.
+            data_type: varchar
+          
+          - name: payablesaccount
+            description: |
+              Reference to the payables account for the vendor.
+            data_type: number(38,0)
+          
+          - name: printoncheckas
+            description: |
+              Name to print on checks for the vendor.
+            data_type: varchar
+          
+          - name: purchaseorderamount
+            description: |
+              Total purchase order amount.
+            data_type: number(38,0)
+          
+          - name: purchaseorderquantity
+            description: |
+              Total purchase order quantity.
+            data_type: number(38,0)
+          
+          - name: purchaseorderquantitydiff
+            description: |
+              Difference between ordered and received quantity.
+            data_type: number(38,0)
+          
+          - name: receiptamount
+            description: |
+              Total receipt amount.
+            data_type: number(38,0)
+          
+          - name: receiptquantity
+            description: |
+              Total receipt quantity.
+            data_type: number(38,0)
+          
+          - name: receiptquantitydiff
+            description: |
+              Difference between receipt and billed quantity.
+            data_type: number(38,0)
+          
+          - name: representingsubsidiary
+            description: |
+              Reference to the subsidiary the vendor represents for intercompany.
+            data_type: number(38,0)
+          
+          - name: subsidiary
+            description: |
+              Primary subsidiary reference for the vendor.
+            data_type: number(38,0)
+          
+          - name: taxidnum
+            description: |
+              Tax identification number for the vendor.
+            data_type: varchar
+          
+          - name: terms
+            description: |
+              Reference to the payment terms for the vendor.
+            data_type: number(38,0)
+          
+          - name: workcalendar
+            description: |
+              Reference to the work calendar for the vendor.
+            data_type: number(38,0)
+
+      - name: vendor_category
+        description: |
+          Stores vendor category definitions for classifying vendors.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the vendor category record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: date_deleted
+            description: |
+              Internal identifier for the deletion date record.
+            data_type: number(38,0)
+          
+          - name: externalid
+            description: |
+              External system identifier for integration purposes.
+            data_type: number(38,0)
+          
+          - name: isinactive
+            description: |
+              Flag indicating whether the vendor category is inactive.
+            data_type: varchar
+          
+          - name: istaxagency
+            description: |
+              Flag indicating whether vendors in this category are tax agencies.
+            data_type: varchar
+          
+          - name: lastmodifieddate
+            description: |
+              Identifier for the last modified date record.
+            data_type: number(38,0)
+          
+          - name: name
+            description: |
+              Name of the vendor category.
+            data_type: varchar
+
+      - name: vendor_subsidiary_relationship
+        description: |
+          Maps vendors to their associated subsidiaries, identifying primary subsidiary assignments.
+        columns:
+          - name: id
+            description: |
+              Unique identifier for the relationship record.
+            data_type: number(38,0)
+          
+          - name: _fivetran_deleted
+            description: |
+              Fivetran soft-delete flag indicating the record has been deleted in the source.
+            data_type: boolean
+          
+          - name: _fivetran_active
+            description: |
+              Fivetran flag indicating whether this is the currently active version of the record.
+            data_type: boolean
+          
+          - name: _fivetran_synced
+            description: |
+              Timestamp when the record was last synced by Fivetran.
+            data_type: timestamp_ntz
+          
+          - name: entity
+            description: |
+              Reference to the vendor entity.
+            data_type: number(38,0)
+          
+          - name: isprimarysub
+            description: |
+              Flag indicating whether this is the primary subsidiary for the vendor.
+            data_type: boolean
+          
+          - name: subsidiary
+            description: |
+              Reference to the subsidiary.
+            data_type: number(38,0)

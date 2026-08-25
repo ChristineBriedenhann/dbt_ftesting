@@ -1,0 +1,191 @@
+version: 2
+
+models:
+  - name: int_ds_netsuite2_account_000
+    description: |
+      Stores transformed account data from NetSuite.
+    columns:
+      - name: id
+        description: |
+          Unique identifier for the account.
+        data_type: number(38,0)
+      
+      - name: _fivetran_deleted
+        description: |
+          Indicates if the record has been deleted.
+        data_type: boolean
+      
+      - name: _fivetran_active
+        description: |
+          Indicates if the record is active.
+        data_type: boolean
+      
+      - name: _fivetran_synced
+        description: |
+          Timestamp of the last successful sync.
+        data_type: timestamp_ntz
+      
+      - name: accountsearchdisplayname
+        description: |
+          Display name used for account search.
+        data_type: varchar
+      
+      - name: accountsearchdisplaynamecopy
+        description: |
+          Copy of the display name used for account search.
+        data_type: varchar
+      
+      - name: acctnumber
+        description: |
+          Account number.
+        data_type: number(38,0)
+      
+      - name: accttype
+        description: |
+          Type of account.
+        data_type: varchar
+      
+      - name: billableexpensesacct
+        description: |
+          Account for billable expenses.
+        data_type: number(38,0)
+      
+      - name: cashflowrate
+        description: |
+          Cash flow rate associated with the account.
+        data_type: varchar
+      
+      - name: category1099misc
+        description: |
+          Category for 1099-MISC forms.
+        data_type: number(38,0)
+      
+      - name: class
+        description: |
+          Class associated with the account.
+        data_type: number(38,0)
+      
+      - name: currency
+        description: |
+          Currency of the account.
+        data_type: number(38,0)
+      
+      - name: custrecord_fam_account_showinfixedasset
+        description: |
+          Custom record indicating if the account should show in fixed assets.
+        data_type: varchar
+      
+      - name: date_deleted
+        description: |
+          Date when the record was deleted.
+        data_type: number(38,0)
+      
+      - name: deferralacct
+        description: |
+          Deferral account.
+        data_type: number(38,0)
+      
+      - name: department
+        description: |
+          Department associated with the account.
+        data_type: number(38,0)
+      
+      - name: description
+        description: |
+          Description of the account.
+        data_type: number(38,0)
+      
+      - name: displaynamewithhierarchy
+        description: |
+          Display name with hierarchy.
+        data_type: varchar
+      
+      - name: externalid
+        description: |
+          External identifier for the account.
+        data_type: varchar
+      
+      - name: fullname
+        description: |
+          Full name of the account.
+        data_type: varchar
+      
+      - name: generalrate
+        description: |
+          General rate associated with the account.
+        data_type: varchar
+      
+      - name: includechildren
+        description: |
+          Indicates if child accounts are included.
+        data_type: varchar
+      
+      - name: inventory
+        description: |
+          Inventory associated with the account.
+        data_type: varchar
+      
+      - name: isinactive
+        description: |
+          Indicates if the account is inactive.
+        data_type: varchar
+      
+      - name: issummary
+        description: |
+          Indicates if the account is a summary account.
+        data_type: varchar
+      
+      - name: lastmodifieddate
+        description: |
+          Date when the record was last modified.
+        data_type: timestamp_ntz
+      
+      - name: location
+        description: |
+          Location associated with the account.
+        data_type: number(38,0)
+      
+      - name: parent
+        description: |
+          Parent account.
+        data_type: number(38,0)
+      
+      - name: reconcilewithmatching
+        description: |
+          Indicates if the account should be reconciled with matching.
+        data_type: varchar
+      
+      - name: revalue
+        description: |
+          Indicates if the account should be revalued.
+        data_type: varchar
+      
+      - name: sbankname
+        description: |
+          Bank name for the account.
+        data_type: number(38,0)
+      
+      - name: sbankroutingnumber
+        description: |
+          Bank routing number for the account.
+        data_type: number(38,0)
+      
+      - name: sspecacct
+        description: |
+          Special account.
+        data_type: varchar
+      
+      - name: subsidiary
+        description: |
+          Subsidiary associated with the account.
+        data_type: varchar
+      
+      - name: eliminate
+        description: |
+          Indicates if the account should be eliminated.
+        data_type: varchar
+      
+      - name: _fivetran_synced_ltz
+        description: |
+          Timestamp of the last successful sync in local timezone.
+        data_type: timestamp_ntz

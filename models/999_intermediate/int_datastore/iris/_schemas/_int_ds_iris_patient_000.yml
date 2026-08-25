@@ -1,0 +1,116 @@
+version: 2
+
+models:
+  - name: int_ds_iris_patient_000
+    description: |
+      Stores transformed patient data related to the Iris dataset.
+    columns:
+      - name: patient_id
+        description: |
+          Unique identifier for each patient.
+        data_type: number(38,0)
+      
+      - name: mrn
+        description: |
+          Medical record number assigned to the patient.
+        data_type: varchar
+      
+      - name: first_name
+        description: |
+          Patient's first name.
+        data_type: varchar
+      
+      - name: last_name
+        description: |
+          Patient's last name.
+        data_type: varchar
+      
+      - name: date_of_birth
+        description: |
+          Patient's date of birth.
+        data_type: date
+      
+      - name: gender
+        description: |
+          Patient's gender.
+        data_type: varchar
+      
+      - name: ssn_last4
+        description: |
+          Last four digits of the patient's Social Security Number.
+        data_type: varchar
+      
+      - name: race
+        description: |
+          Patient's race.
+        data_type: varchar
+      
+      - name: ethnicity
+        description: |
+          Patient's ethnicity.
+        data_type: varchar
+      
+      - name: primary_language
+        description: |
+          Patient's primary language.
+        data_type: varchar
+      
+      - name: marital_status
+        description: |
+          Patient's marital status.
+        data_type: varchar
+      
+      - name: contact_info
+        description: |
+          Patient's contact information.
+        data_type: variant
+      
+      - name: emergency_contact
+        description: |
+          Emergency contact information for the patient.
+        data_type: variant
+      
+      - name: insurance_info
+        description: |
+          Patient's insurance information.
+        data_type: variant
+      
+      - name: primary_facility_id
+        description: |
+          Identifier for the primary healthcare facility associated with the patient.
+        data_type: number(38,0)
+      
+      - name: primary_provider_id
+        description: |
+          Identifier for the primary healthcare provider associated with the patient.
+        data_type: number(38,0)
+      
+      - name: is_deceased
+        description: |
+          Indicates whether the patient is deceased.
+        data_type: boolean
+      
+      - name: deceased_date
+        description: |
+          Date of the patient's death, if applicable.
+        data_type: date
+      
+      - name: created_at
+        description: |
+          Timestamp when the record was created.
+        data_type: timestamp_ntz
+      
+      - name: updated_at
+        description: |
+          Timestamp when the record was last updated.
+        data_type: timestamp_ntz
+      
+      - name: _loaded_at
+        description: |
+          Timestamp when the data was loaded into the system.
+        data_type: timestamp_ntz
+      
+      - name: _sf_load_at
+        description: |
+          Timestamp when the data was loaded into the Snowflake system.
+        data_type: timestamp_ntz

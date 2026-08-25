@@ -1,0 +1,116 @@
+version: 2
+
+models:
+  - name: int_ds_netsuite2_currency_000
+    description: |
+      Stores transformed currency data from NetSuite.
+    columns:
+      - name: id
+        description: |
+          Unique identifier for the currency record.
+        data_type: number(38,0)
+      
+      - name: _fivetran_deleted
+        description: |
+          Indicates whether the record has been deleted.
+        data_type: boolean
+      
+      - name: _fivetran_active
+        description: |
+          Indicates whether the record is currently active.
+        data_type: boolean
+      
+      - name: _fivetran_synced
+        description: |
+          Timestamp of the last successful sync operation.
+        data_type: timestamp_ntz
+      
+      - name: _fivetran_start
+        description: |
+          Timestamp of the start of the sync operation.
+        data_type: timestamp_ntz
+      
+      - name: _fivetran_end
+        description: |
+          Timestamp of the end of the sync operation.
+        data_type: timestamp_ntz
+      
+      - name: currencyformatsample
+        description: |
+          Sample format of the currency.
+        data_type: varchar
+      
+      - name: date_deleted
+        description: |
+          Date when the record was deleted.
+        data_type: number(38,0)
+      
+      - name: displaysymbol
+        description: |
+          Symbol used to display the currency.
+        data_type: varchar
+      
+      - name: exchangerate
+        description: |
+          Exchange rate of the currency.
+        data_type: number(18,6)
+      
+      - name: fxrateupdatetimezone
+        description: |
+          Timezone for the exchange rate update.
+        data_type: varchar
+      
+      - name: includeinfxrateupdates
+        description: |
+          Indicates whether to include in exchange rate updates.
+        data_type: varchar
+      
+      - name: isbasecurrency
+        description: |
+          Indicates whether the currency is the base currency.
+        data_type: varchar
+      
+      - name: isinactive
+        description: |
+          Indicates whether the currency is inactive.
+        data_type: varchar
+      
+      - name: lastmodifieddate
+        description: |
+          Date when the record was last modified.
+        data_type: timestamp_ntz
+      
+      - name: name
+        description: |
+          Name of the currency.
+        data_type: varchar
+      
+      - name: overridecurrencyformat
+        description: |
+          Indicates whether the currency format is overridden.
+        data_type: varchar
+      
+      - name: symbol
+        description: |
+          Symbol representing the currency.
+        data_type: varchar
+      
+      - name: symbolplacement
+        description: |
+          Placement of the currency symbol.
+        data_type: number(38,0)
+      
+      - name: _fivetran_synced_ltz
+        description: |
+          Timestamp of the last successful sync operation in local timezone.
+        data_type: timestamp_ntz
+      
+      - name: _fivetran_start_ltz
+        description: |
+          Timestamp of the start of the sync operation in local timezone.
+        data_type: timestamp_ntz
+      
+      - name: _fivetran_end_ltz
+        description: |
+          Timestamp of the end of the sync operation in local timezone.
+        data_type: timestamp_ntz

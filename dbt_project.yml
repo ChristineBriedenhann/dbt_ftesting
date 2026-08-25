@@ -1,0 +1,197 @@
+name: qrious-dbt-development-packages
+version: 1.0.0
+config-version: 2
+profile: qrious-dbt-development-packages
+model-paths:
+  - models
+analysis-paths:
+  - analyses
+test-paths:
+  - tests
+seed-paths:
+  - seeds
+macro-paths:
+  - macros
+snapshot-paths:
+  - snapshots
+clean-targets:
+  - target
+  - dbt_packages
+
+dispatch:
+  - macro_namespace: dbt
+    search_order:
+      - qrious-dbt-development-packages
+      - dbt_query_tags
+      - dbt
+
+query-comment:
+  comment: '{{ dbt_query_tags.get_query_comment(node) }}'
+  append: true
+
+
+vars:
+  low_date: "1900-01-01 00:00:00.000"
+  high_date: "2999-12-31 23:59:58.999"
+  project_timezone: 'Pacific/Auckland'
+  datastore_process_date: "{{get_parameter_value('datastore_process_date')}}"
+  datastore_full_refresh: "{{get_parameter_value('datastore_full_refresh')}}"
+  dwh_process_date: "{{get_parameter_value('dwh_process_date')}}"
+  dwh_full_refresh: "{{get_parameter_value('dwh_full_refresh')}}"
+  data_test_severity: error
+
+
+data_tests:
+  qrious-dbt-development-packages:
+    +store_failures: true
+    +store_failures_as: table
+    # +database: "{% if target.name == 'sandbox' %}{{ env_var('DBT_CURRENT_USER') }}_{% endif %}DATASTORE"
+    +schema: "dbt_test__audit"
+
+models:
+  elementary:
+    # +database: "{% if target.name == 'sandbox' %}{{ env_var('DBT_CURRENT_USER') }}_{% endif %}DATASTORE"
+    +schema: "elementary"
+    +materialized: table
+  
+  qrious-dbt-development-packages:
+    000_sources:
+      # +database: "{% if target.name == 'sandbox' %}{{ env_var('DBT_CURRENT_USER') }}_{% endif %}DATASTORE"
+      +schema: "src"
+      +materialized: view
+      +tags: ["src","sources"]
+      +persist_docs:
+        relation: true
+        columns: true
+      +docs:
+        node_color: "#9E9E9E" # grey
+      iris:
+        +tags: ["iris"]
+      netsuite2:
+        +tags: ["netsuite2"]
+      yahoo_finance:
+        +tags: ["yahoo_finance"]
+    
+    010_datastore:
+      # +database: "{% if target.name == 'sandbox' %}{{ env_var('DBT_CURRENT_USER') }}_{% endif %}DATASTORE"
+      +schema: "datastore"
+      +materialized: table
+      +transient: false
+      +tags: ["ods","datastore"]
+      +post-hook:
+        - "{{ propagate_column_tags() }}"
+      +persist_docs:
+        relation: true
+        columns: true
+      +docs:
+        node_color: "#4CAF50" # green
+      iris:
+        +tags: ["iris"]
+      netsuite2:
+        +tags: ["netsuite2"]
+      yahoo_finance:
+        +tags: ["yahoo_finance"]
+    
+    020_dwh:
+      # +database: "{% if target.name == 'sandbox' %}{{ env_var('DBT_CURRENT_USER') }}_{% endif %}DATASTORE"
+      +schema: "dwh"
+      +materialized: table
+      +transient: false
+      +tags: ["dwh"]
+      +post-hook:
+        - "{{ propagate_column_tags() }}"
+      +persist_docs:
+        relation: true
+        columns: true
+      +docs:
+        node_color: "#2196F3" # blue
+      dims:
+        +tags: ["dwh","dims"]
+      facts:
+        +tags: ["dwh","facts"]
+    
+    030_da_publish:
+      # +database: "{% if target.name == 'sandbox' %}{{ env_var('DBT_CURRENT_USER') }}_{% endif %}DATASTORE"
+      +schema: "da_publish"
+      +materialized: table
+      +transient: false
+      +tags: ["dwh"]
+      +persist_docs:
+        relation: true
+        columns: true
+      +post-hook:
+        - "{{ propagate_column_tags() }}"
+      +docs:
+        node_color: "#9C27B0" # purple
+    
+    040_mart:
+      # +database: "{% if target.name == 'sandbox' %}{{ env_var('DBT_CURRENT_USER') }}_{% endif %}MART"
+      +schema: "mart"
+      +materialized: table
+      +transient: false
+      +tags: ["mart"]
+      +post-hook:
+        - "{{ propagate_column_tags() }}"
+      +persist_docs:
+        relation: true
+        columns: true
+      +docs:
+        node_color: "#00BCD4" # cyan
+      exec:
+        +schema: "mart__exec"
+        +tags: ["exec"]
+      finance:
+        +schema: "mart__finance"
+        +tags: ["finance"]
+      hr:
+        +schema: "mart__hr"
+        +tags: ["hr"]
+      it:
+        +schema: "mart__it"
+        +tags: ["it"]
+      public:
+        +schema: "mart__public"
+        +tags: ["public"]
+
+    990_operations:
+      # +database: "{% if target.name == 'sandbox' %}{{ env_var('DBT_CURRENT_USER') }}_{% endif %}PLATFORM"
+      +schema: "operations"
+      +materialized: table
+      +transient: false
+      +tags: ["operations","ops"]
+      +persist_docs:
+        relation: true
+        columns: true
+      +post-hook:
+        - "{{ propagate_column_tags() }}"
+      +docs:
+        node_color: "#FF00FF" # magenta
+    
+    999_intermediate:
+      +materialized: table
+      +transient: true
+      +tags: ["intermediate","int"]
+      +persist_docs:
+        relation: true
+        columns: true
+      +docs:
+        node_color: "#FFC0CB" # pink
+      int_datastore:
+        # +database: "{% if target.name == 'sandbox' %}{{ env_var('DBT_CURRENT_USER') }}_{% endif %}DATASTORE"
+        +schema: "int_datastore"
+      int_dwh:
+        # +database: "{% if target.name == 'sandbox' %}{{ env_var('DBT_CURRENT_USER') }}_{% endif %}DWH"
+        +schema: "int_dwh"
+      int_operations:
+        # +database: "{% if target.name == 'sandbox' %}{{ env_var('DBT_CURRENT_USER') }}_{% endif %}PLATFORM"
+        +schema: "int_operations"
+      
+        
+snapshots:
+  qrious-dbt-development-packages:
+    +schema: "int_datastore"
+    +persist_docs:
+        relation: true
+        columns: true
+    +docs:
+      node_color: "#FF9800"
